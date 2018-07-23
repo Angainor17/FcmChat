@@ -33,6 +33,19 @@ android {
             ext.alwaysUpdateBuildId = false
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/io.netty.versions.properties'
+        exclude 'META-INF/INDEX.LIST'
+    }
 
     kapt {
         generateStubs = true
@@ -43,9 +56,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation(project(path: ':server')) {
-        exclude group: 'com.google', module: 'firebase'
-        exclude group: 'com.google.firebase', module: 'firebase-admin'
-        exclude group: 'com.google.firebase', module: 'firebase'
+//        exclude group: 'com.google', module: 'firebase'
+//        exclude group: 'com.google.firebase', module: 'firebase-admin'
+//        exclude group: 'com.google.firebase', module: 'firebase'
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

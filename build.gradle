@@ -3,6 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.2.51'
     ext.moxy_version = '1.5.5'
+    ext.netty_version = '4.1.22.Final'
 
     ext.moxy = [
             moxyCompiler: "com.arello-mobile:moxy-compiler:$moxy_version",
