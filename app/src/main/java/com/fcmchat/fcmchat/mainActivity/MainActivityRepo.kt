@@ -33,7 +33,8 @@ class MainActivityRepo {
     }
 
     fun sendMessageAll(firebaseToken: String) {
-        fcmServer = FcmServerFactory.create(firebaseToken)
+        fcmServer = FcmServerFactory.createServer(firebaseToken)
+
         fcmServer.sendPushForAll()
     }
 }

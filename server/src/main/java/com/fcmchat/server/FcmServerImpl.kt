@@ -11,15 +11,17 @@ import java.io.FileInputStream
 /**
  * Created by Voronin Igor on 16.07.2018.
  */
-internal class FcmServerImpl(val registrationToken: String) : FcmServer {
+internal class FcmServerImpl(private val registrationToken: String) : FcmServer {
 
     private var firebaseApp: FirebaseApp
 
     init {
         val serviceAccount = FileInputStream("path/to/serviceAccountKey.json")
+        val googleCredentials = GoogleCredentials.fromStream(serviceAccount)
+
 
         val options = FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setCredentials(googleCredentials)
                 .setDatabaseUrl("https://fcmchat-b191a.firebaseio.com")
                 .build()
 
