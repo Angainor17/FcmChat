@@ -6,38 +6,101 @@
     android:layout_height="match_parent"
     tools:context=".mainActivity.MainActivity">
 
-    <EditText
-        android:id="@+id/firebase_id_edit_text"
-        android:layout_width="300dp"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/firebase_id_edit_text_container"
+
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/firebase_id_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+
+            android:hint="Firebase ID"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/message_edit_text_container"
+
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Firebase Id"
 
-        app:layout_constraintBottom_toTopOf="@+id/send_message_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/send_message_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firebase_id_edit_text_container">
+
+        <EditText
+            android:id="@+id/message_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="5"
+
+            android:hint="Message"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/send_message_btn"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Send"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintBottom_toBottomOf="@+id/message_edit_text_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/message_edit_text_container"
+        app:layout_constraintTop_toTopOf="@+id/message_edit_text_container" />
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/firebase_id_edit_text_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/firebase_id_edit_text_container"
+        app:srcCompat="@drawable/ic_wallpaper_black_24dp" />
+
+    <Button
+        android:id="@+id/qr_code_scanner_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Scan QR"
+        android:textAllCaps="false"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/message_edit_text_container" />
 
 </android.support.constraint.ConstraintLayout>

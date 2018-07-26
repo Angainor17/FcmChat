@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fcmchat.fcmchat">
 
+    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -10,14 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".mainActivity.MainActivity">
+
+        <activity
+            android:name=".mainActivity.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
 
         <service android:name=".fcm.MyFirebaseInstanceIDService">
             <intent-filter>
@@ -39,6 +46,9 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
 
+        <activity
+            android:name=".scanner.ScannerActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

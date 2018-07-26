@@ -11,6 +11,7 @@ android {
         applicationId "com.fcmchat.fcmchat"
         minSdkVersion 15
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -19,6 +20,10 @@ android {
             annotationProcessorOptions {
                 includeCompileClasspath = true
             }
+        }
+
+        vectorDrawables {
+            useSupportLibrary = true
         }
     }
 
@@ -56,9 +61,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation(project(path: ':server')) {
-//        exclude group: 'com.google', module: 'firebase'
-//        exclude group: 'com.google.firebase', module: 'firebase-admin'
-//        exclude group: 'com.google.firebase', module: 'firebase'
+        exclude group: 'com.google', module: 'firebase'
+        exclude group: 'com.google.firebase', module: 'firebase-admin'
+        exclude group: 'com.google.firebase', module: 'firebase'
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -66,10 +71,10 @@ dependencies {
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation 'com.android.support:multidex:1.0.3'
 
 
     implementation 'com.google.firebase:firebase-messaging:17.1.0'
-//    implementation "com.google.firebase:firebase-core:16.0.1"
 
     implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -81,6 +86,9 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     kapt 'com.jakewharton:butterknife-compiler:8.8.1'
 
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.kenglxn.QRGen:android:2.5.0'
+    implementation 'me.dm7.barcodescanner:zbar:1.8.4'
 
     kapt moxy.moxyCompiler
     implementation moxy.moxy

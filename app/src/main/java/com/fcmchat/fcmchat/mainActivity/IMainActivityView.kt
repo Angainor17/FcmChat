@@ -7,6 +7,12 @@ import com.arellomobile.mvp.MvpView
  */
 interface IMainActivityView : MvpView {
 
-//    fun getInputText(): String
+    fun showSuccess()
+
+    fun showFail()
+
+    fun showText(text: String)
+
+    fun showQrCode(firebaseToken: String)
 
 }

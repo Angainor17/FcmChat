@@ -7,10 +7,16 @@ android {
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
     }
 
     buildTypes {
@@ -23,30 +29,31 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation('com.google.api-client:google-api-client:1.23.0') {
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'com.google.guava', module: 'guava-jdk5'
+        exclude group: 'com.google', module: 'guava'
+    }
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation ('com.google.api-client:google-api-client-gson:1.23.0'){
+        exclude group: 'com.google.api-client', module: 'google-api-client'
+    }
+    implementation ('com.google.api:api-common:1.2.0'){
+        exclude group: 'com.google.api-client', module: 'google-api-client'
+    }
 
-
-    implementation 'com.google.api-client:google-api-client:1.23.0'
-    implementation 'com.google.api-client:google-api-client-gson:1.23.0'
-    implementation 'com.google.api:api-common:1.2.0'
     implementation 'com.google.auth:google-auth-library-oauth2-http:0.8.0'
+
     implementation 'com.google.cloud:google-cloud-storage:1.27.0'
     implementation 'com.google.cloud:google-cloud-firestore:0.45.0-beta'
-
+    implementation ('com.google.apis:google-api-services-oauth2:v1-rev143-1.23.0'){
+        exclude group: 'com.google.api-client', module: 'google-api-client'
+    }
 
     implementation 'com.google.guava:guava:20.0'
-//    implementation 'org.json:json:20160810'
     implementation 'com.android.support:support-annotations:27.1.1'
     implementation 'org.slf4j:slf4j-api:1.7.25'
     implementation "io.netty:netty-codec-http:$netty_version"
     implementation "io.netty:netty-handler:$netty_version"
     implementation "io.netty:netty-transport:$netty_version"
-
-
-
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

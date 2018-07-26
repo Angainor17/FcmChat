@@ -13,7 +13,7 @@ class FcmServerFactory {
             this.context = context
         }
 
-        fun createServer(registrationToken: String): FcmServer = FcmServerImpl(registrationToken)
+        fun createServer(): FcmServer = FcmServerImpl()
 
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
