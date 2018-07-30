@@ -2,6 +2,7 @@ package com.fcmchat.fcmchat.mainActivity
 
 import com.fcmchat.server.FcmServer
 import com.fcmchat.server.FcmServerFactory
+import com.fcmchat.server.model.FcmMessage
 import io.reactivex.Completable
 
 
@@ -10,10 +11,11 @@ import io.reactivex.Completable
  */
 class MainActivityRepo {
 
-    fun sendMessageAll(firebaseToken: String, message: String): Completable {
-        initFcmServer()
+    private var fcmServer: FcmServer? = null
 
-        return fcmServer!!.sendPushForAll(message)
+    fun sendMessageAll(message: String): Completable {
+        initFcmServer()
+        return fcmServer!!.sendPushForAll(FcmMessage(message))
     }
 
     private fun initFcmServer() {
@@ -24,8 +26,6 @@ class MainActivityRepo {
 
     fun sendMessageTo(key: String, message: String): Completable {
         initFcmServer()
-        return fcmServer!!.sendPushForTo(key, message)
+        return fcmServer!!.sendPushForTo(FcmMessage(message, key))
     }
-
-    private var fcmServer: FcmServer? = null
 }

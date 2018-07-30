@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.fcmchat.fcmchat.debug
 import com.fcmchat.fcmchat.eventBus.NewMessageEvent
+import com.fcmchat.server.FcmServer
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import io.reactivex.Completable
@@ -33,7 +34,7 @@ class MainActivityPresenter : MvpPresenter<IMainActivityView>() {
     private fun initFirebaseToken() {
         if(firebaseToken.isEmpty()){
             firebaseToken = FirebaseInstanceId.getInstance().token.toString()
-            FirebaseMessaging.getInstance().subscribeToTopic("allDevices")
+            FirebaseMessaging.getInstance().subscribeToTopic(FcmServer.ALL_DEVICES_TOPIC)
             debug(firebaseToken)
         }
     }
@@ -53,7 +54,7 @@ class MainActivityPresenter : MvpPresenter<IMainActivityView>() {
             return
         }
 
-        compositeDisposable.add(repository.sendMessageAll(firebaseToken, message)
+        compositeDisposable.add(repository.sendMessageAll(message)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe()

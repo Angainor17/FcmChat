@@ -1,5 +1,6 @@
 package com.fcmchat.server
 
+import com.fcmchat.server.model.FcmMessage
 import io.reactivex.Completable
 
 /**
@@ -7,8 +8,14 @@ import io.reactivex.Completable
  */
 interface FcmServer {
 
-    fun sendPushForAll(messageText: String): Completable
+    companion object {
+        const val ALL_DEVICES_TOPIC = "allDevices"
+        const val DATA_KEY = "message"
+    }
 
-    fun sendPushForTo(key: String, messageText: String): Completable
+
+    fun sendPushForAll(message: FcmMessage): Completable
+
+    fun sendPushForTo(message: FcmMessage): Completable
 
 }

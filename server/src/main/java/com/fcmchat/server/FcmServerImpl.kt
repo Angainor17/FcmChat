@@ -5,6 +5,7 @@ import com.fcmchat.adminsdk.FirebaseOptions
 import com.fcmchat.adminsdk.messaging.AndroidConfig
 import com.fcmchat.adminsdk.messaging.FirebaseMessaging
 import com.fcmchat.adminsdk.messaging.Message
+import com.fcmchat.server.model.FcmMessage
 import com.google.auth.oauth2.GoogleCredentials
 import io.reactivex.Completable
 
@@ -13,50 +14,50 @@ import io.reactivex.Completable
  */
 internal class FcmServerImpl : FcmServer {
 
+    companion object {
+        const val DATA_BASE_URL = "https://fcmchat-b191a.firebaseio.com"
+    }
+
     private var firebaseApp: FirebaseApp
 
     init {
         val serviceAccount = FcmServerFactory.context.resources.openRawResource(R.raw.fcm_server)
-
         val googleCredentials = GoogleCredentials.fromStream(serviceAccount)
 
         val options = FirebaseOptions.Builder()
                 .setCredentials(googleCredentials)
-                .setDatabaseUrl("https://fcmchat-b191a.firebaseio.com")
+                .setDatabaseUrl(DATA_BASE_URL)
                 .build()
 
         firebaseApp = FirebaseApp.initializeApp(options)
     }
 
-    override fun sendPushForTo(key: String, messageText: String): Completable = Completable.create {
+    override fun sendPushForTo(message: FcmMessage): Completable = Completable.create {
         try {
-            val message = Message.builder()
-                    .putData("message", messageText)
+            FirebaseMessaging.getInstance().send(Message.builder()
+                    .putData(FcmServer.DATA_KEY, message.messageText)
                     .setAndroidConfig(AndroidConfig.builder()
                             .setPriority(AndroidConfig.Priority.HIGH)
                             .build())
-                    .setToken(key)
-                    .build()
-
-            FirebaseMessaging.getInstance().send(message)
+                    .setToken(message.key)
+                    .build())
             it.onComplete()
         } catch (e: Exception) {
             it.onError(e)
         }
     }
 
-    override fun sendPushForAll(messageText: String): Completable {
+    override fun sendPushForAll(message: FcmMessage): Completable {
         return Completable.create {
             try {
-                val message = Message.builder()
-                        .putData("message", messageText)
+
+                FirebaseMessaging.getInstance().send(Message.builder()
+                        .putData(FcmServer.DATA_KEY, message.messageText)
                         .setAndroidConfig(AndroidConfig.builder()
                                 .setPriority(AndroidConfig.Priority.HIGH)
                                 .build())
-                        .setTopic("allDevices")
-                        .build()
-
-                FirebaseMessaging.getInstance().send(message)
+                        .setTopic(FcmServer.ALL_DEVICES_TOPIC)
+                        .build())
                 it.onComplete()
             } catch (e: Exception) {
                 it.onError(e)
