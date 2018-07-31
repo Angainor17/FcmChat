@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.mainActivity
+package com.fcmchat.fcmchat.mainActivity.presentation.view
 
 import com.arellomobile.mvp.MvpView
 
@@ -6,10 +6,6 @@ import com.arellomobile.mvp.MvpView
  * Created by Voronin Igor on 16.07.2018.
  */
 interface IMainActivityView : MvpView {
-
-    fun showSuccess()
-
-    fun showFail()
 
     fun showText(text: String)
 

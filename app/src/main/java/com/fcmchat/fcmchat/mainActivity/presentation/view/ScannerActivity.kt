@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.scanner
+package com.fcmchat.fcmchat.mainActivity.presentation.view
 
 import android.app.Activity
 import android.content.Intent

@@ -1,7 +1,7 @@
-package com.fcmchat.fcmchat
+package com.fcmchat.fcmchat.app
 
-import android.app.Application
 import android.support.multidex.MultiDexApplication
+import com.fcmchat.fcmchat.app.di.Injector
 import com.fcmchat.server.FcmServerFactory
 
 /**
@@ -9,8 +9,13 @@ import com.fcmchat.server.FcmServerFactory
  */
 class App : MultiDexApplication() {
 
+    companion object {
+        lateinit var injector: Injector
+    }
+
     override fun onCreate() {
         super.onCreate()
+        injector = Injector(this)
         FcmServerFactory.init(this)
     }
 }

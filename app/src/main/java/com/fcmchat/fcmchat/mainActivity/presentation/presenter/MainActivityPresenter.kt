@@ -1,9 +1,11 @@
-package com.fcmchat.fcmchat.mainActivity
+package com.fcmchat.fcmchat.mainActivity.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.fcmchat.fcmchat.debug
 import com.fcmchat.fcmchat.eventBus.NewMessageEvent
+import com.fcmchat.fcmchat.mainActivity.data.MainActivityRepo
+import com.fcmchat.fcmchat.mainActivity.presentation.view.IMainActivityView
 import com.fcmchat.server.FcmServer
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
@@ -32,7 +34,7 @@ class MainActivityPresenter : MvpPresenter<IMainActivityView>() {
     }
 
     private fun initFirebaseToken() {
-        if(firebaseToken.isEmpty()){
+        if (firebaseToken.isEmpty()) {
             firebaseToken = FirebaseInstanceId.getInstance().token.toString()
             FirebaseMessaging.getInstance().subscribeToTopic(FcmServer.ALL_DEVICES_TOPIC)
             debug(firebaseToken)

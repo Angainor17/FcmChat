@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.mainActivity
+package com.fcmchat.fcmchat.mainActivity.presentation.view
 
 import android.Manifest
 import android.content.Intent
@@ -20,7 +20,7 @@ import butterknife.OnClick
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.fcmchat.fcmchat.R
-import com.fcmchat.fcmchat.scanner.ScannerActivity
+import com.fcmchat.fcmchat.mainActivity.presentation.presenter.MainActivityPresenter
 import net.glxn.qrgen.android.QRCode
 
 class MainActivity : MvpAppCompatActivity(), IMainActivityView {
@@ -30,13 +30,6 @@ class MainActivity : MvpAppCompatActivity(), IMainActivityView {
     @Nullable @BindView(R.id.firebase_id_edit_text) lateinit var tokenEditText: EditText
     @Nullable @BindView(R.id.message_edit_text) lateinit var messageEditText: EditText
 
-    override fun showSuccess() {
-        showMessage("Success")
-    }
-
-    override fun showFail() {
-        showMessage("Fail")
-    }
 
     override fun showText(text: String) {
         showMessage(text)
@@ -85,7 +78,7 @@ class MainActivity : MvpAppCompatActivity(), IMainActivityView {
         presenter.sendMessageBtnClick(tokenEditText.text.toString(), messageEditText.text.toString())
     }
 
-    private final inline fun showMessage(text: String) {
+    private fun showMessage(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
