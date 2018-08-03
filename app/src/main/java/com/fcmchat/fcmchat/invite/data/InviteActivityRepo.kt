@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.mainActivity.data
+package com.fcmchat.fcmchat.invite.data
 
 import android.content.SharedPreferences
 import com.fcmchat.server.FcmServer
@@ -10,7 +10,7 @@ import io.reactivex.Completable
 /**
  * Created by Voronin Igor on 16.07.2018.
  */
-class MainActivityRepo : IMainActivityRepo {
+class InviteActivityRepo : IInviteActivityRepo {
 
     private var fcmServer: FcmServer = FcmServerFactory.createServer()
     private lateinit var sharedPreferences: SharedPreferences

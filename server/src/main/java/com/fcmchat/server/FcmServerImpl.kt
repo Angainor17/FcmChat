@@ -50,7 +50,6 @@ internal class FcmServerImpl : FcmServer {
     override fun sendPushForAll(message: FcmMessage): Completable {
         return Completable.create {
             try {
-
                 FirebaseMessaging.getInstance().send(Message.builder()
                         .putData(FcmServer.DATA_KEY, message.messageText)
                         .setAndroidConfig(AndroidConfig.builder()

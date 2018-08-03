@@ -1,19 +1,19 @@
-package com.fcmchat.fcmchat.mainActivity.business
+package com.fcmchat.fcmchat.invite.business
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.mainActivity.data.IMainActivityRepo
+import com.fcmchat.fcmchat.invite.data.IInviteActivityRepo
 import io.reactivex.Completable
 import javax.inject.Inject
 
 /**
  * Created by Voronin Igor on 31.07.2018.
  */
-class MainActivityInteractor : IMainActivityInteractor {
+class InviteActivityInteractor : IInviteActivityInteractor {
 
-    @Inject lateinit var repo: IMainActivityRepo
+    @Inject lateinit var repo: IInviteActivityRepo
 
     init {
-        App.injector.mainActivityComponent.inject(this)
+        App.injector.inviteComponent.inject(this)
     }
 
     override fun sendMessageAll(message: String): Completable = repo.sendMessageAll(message)

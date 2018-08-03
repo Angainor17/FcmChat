@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.mainActivity.presentation.view
+package com.fcmchat.fcmchat.invite.presentation.view
 
 import android.app.Activity
 import android.content.Intent

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_add"
+        android:icon="@drawable/ic_plus_one_black_24dp"
+        android:title="Add User" />
+
+    <item
+        android:id="@+id/navigation_transaction"
+        android:icon="@drawable/ic_cloud_black_24dp"
+        android:title="Transactions" />
+
+    <item
+        android:id="@+id/navigation_chains"
+        android:icon="@drawable/ic_insert_chart_black_24dp"
+        android:title="Chains" />
+
+</menu>

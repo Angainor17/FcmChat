@@ -1,11 +1,11 @@
-package com.fcmchat.fcmchat.mainActivity.presentation.presenter
+package com.fcmchat.fcmchat.invite.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.fcmchat.fcmchat.debug
 import com.fcmchat.fcmchat.eventBus.NewMessageEvent
-import com.fcmchat.fcmchat.mainActivity.data.MainActivityRepo
-import com.fcmchat.fcmchat.mainActivity.presentation.view.IMainActivityView
+import com.fcmchat.fcmchat.invite.data.InviteActivityRepo
+import com.fcmchat.fcmchat.invite.presentation.view.IInviteActivityView
 import com.fcmchat.server.FcmServer
 import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
@@ -22,10 +22,10 @@ import org.greenrobot.eventbus.ThreadMode
  * Created by Voronin Igor on 16.07.2018.
  */
 @InjectViewState
-class MainActivityPresenter : MvpPresenter<IMainActivityView>() {
+class InviteActivityPresenter : MvpPresenter<IInviteActivityView>() {
 
     private var firebaseToken = ""
-    private val repository = MainActivityRepo()
+    private val repository = InviteActivityRepo()
     private val compositeDisposable = CompositeDisposable()
 
     init {
@@ -47,7 +47,11 @@ class MainActivityPresenter : MvpPresenter<IMainActivityView>() {
     }
 
     fun sendMessageBtnClick(key: String, message: String) {
-        if (!key.isEmpty()) {
+        if (!message.isEmpty()) {
+            return
+        }
+
+        if (!key.isEmpty() && !message.isEmpty()) {
             compositeDisposable.add(repository.sendMessageTo(key, message)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
