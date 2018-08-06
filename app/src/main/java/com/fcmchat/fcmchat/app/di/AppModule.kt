@@ -14,12 +14,12 @@ import ru.terrakok.cicerone.Router
 @Module()
 class AppModule(private val context: Context) {
 
+    private val cicerone: Cicerone<Router> = Cicerone.create()
+
     @Provides fun context() = context
 
     @Provides fun getNavigatorHolder(): NavigatorHolder = cicerone.navigatorHolder
 
     @Provides fun getRouter(): Router = cicerone.router
-
-    private val cicerone: Cicerone<Router> = Cicerone.create()
 
 }

@@ -32,14 +32,12 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
     @Nullable @BindView(R.id.firebase_id_edit_text) lateinit var tokenEditText: EditText
     @Nullable @BindView(R.id.message_edit_text) lateinit var messageEditText: EditText
 
-
     override fun showText(text: String) {
         showMessage(text)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.invite_fragment, container)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+            inflater.inflate(R.layout.invite_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
