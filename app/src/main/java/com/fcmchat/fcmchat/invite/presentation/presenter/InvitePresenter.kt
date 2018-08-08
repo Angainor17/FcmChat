@@ -55,8 +55,5 @@ class InvitePresenter : MvpPresenter<IInviteActivityView>() {
         firebaseToken = interactor.getFcmKey()
     }
 
-    private fun createInviteMessage(): InviteRequest {
-        val user = interactor.getCurrentUser()
-        return InviteRequest(user.name, user.key)
-    }
+    private fun createInviteMessage() = InviteRequest(interactor.getCurrentUser())
 }
