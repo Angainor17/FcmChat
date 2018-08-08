@@ -17,8 +17,9 @@ class App : MultiDexApplication() {
     }
 
     override fun onCreate() {
-        super.onCreate()
-        injector = Injector(this)
         FcmServerFactory.init(this)
+        injector = Injector(this)
+        super.onCreate()
+
     }
 }

@@ -32,7 +32,7 @@ internal class FcmServerImpl : FcmServer {
         firebaseApp = FirebaseApp.initializeApp(options)
     }
 
-    override fun sendPushForTo(message: FcmMessage): Completable = Completable.create {
+    override fun sendPushTo(message: FcmMessage): Completable = Completable.create {
         try {
             FirebaseMessaging.getInstance().send(Message.builder()
                     .putData(FcmServer.DATA_KEY, message.messageText)
@@ -47,20 +47,18 @@ internal class FcmServerImpl : FcmServer {
         }
     }
 
-    override fun sendPushForAll(message: FcmMessage): Completable {
-        return Completable.create {
-            try {
-                FirebaseMessaging.getInstance().send(Message.builder()
-                        .putData(FcmServer.DATA_KEY, message.messageText)
-                        .setAndroidConfig(AndroidConfig.builder()
-                                .setPriority(AndroidConfig.Priority.HIGH)
-                                .build())
-                        .setTopic(FcmServer.ALL_DEVICES_TOPIC)
-                        .build())
-                it.onComplete()
-            } catch (e: Exception) {
-                it.onError(e)
-            }
+    override fun sendPushAll(message: FcmMessage, topicName: String): Completable = Completable.create {
+        try {
+            FirebaseMessaging.getInstance().send(Message.builder()
+                    .putData(FcmServer.DATA_KEY, message.messageText)
+                    .setAndroidConfig(AndroidConfig.builder()
+                            .setPriority(AndroidConfig.Priority.HIGH)
+                            .build())
+                    .setTopic(topicName)
+                    .build())
+            it.onComplete()
+        } catch (e: Exception) {
+            it.onError(e)
         }
     }
 }

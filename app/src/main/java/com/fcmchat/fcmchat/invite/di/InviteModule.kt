@@ -1,9 +1,7 @@
 package com.fcmchat.fcmchat.invite.di
 
-import com.fcmchat.fcmchat.invite.business.IInviteActivityInteractor
-import com.fcmchat.fcmchat.invite.business.InviteActivityInteractor
-import com.fcmchat.fcmchat.invite.data.IInviteActivityRepo
-import com.fcmchat.fcmchat.invite.data.InviteActivityRepo
+import com.fcmchat.fcmchat.invite.business.IInviteInteractor
+import com.fcmchat.fcmchat.invite.business.InviteInteractor
 import dagger.Module
 import dagger.Provides
 
@@ -13,7 +11,5 @@ import dagger.Provides
 @Module()
 class InviteModule {
 
-    @Provides fun getInteractor(): IInviteActivityInteractor = InviteActivityInteractor()
-
-    @Provides fun getRepo(): IInviteActivityRepo = InviteActivityRepo()
+    @Provides fun getInteractor(): IInviteInteractor = InviteInteractor()
 }

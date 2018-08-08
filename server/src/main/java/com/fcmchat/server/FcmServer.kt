@@ -13,9 +13,8 @@ interface FcmServer {
         const val DATA_KEY = "message"
     }
 
+    fun sendPushAll(message: FcmMessage, topicName: String = ALL_DEVICES_TOPIC): Completable
 
-    fun sendPushForAll(message: FcmMessage): Completable
-
-    fun sendPushForTo(message: FcmMessage): Completable
+    fun sendPushTo(message: FcmMessage): Completable
 
 }

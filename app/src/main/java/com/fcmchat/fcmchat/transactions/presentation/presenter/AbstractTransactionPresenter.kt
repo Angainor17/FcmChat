@@ -7,4 +7,7 @@ import com.fcmchat.fcmchat.transactions.presentation.view.ITransactionView
  * Created by Voronin Igor on 06.08.2018.
  */
 abstract class AbstractTransactionPresenter : MvpPresenter<ITransactionView>() {
+
+    abstract fun addTransactionBtnClick()
+
 }

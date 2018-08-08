@@ -12,6 +12,8 @@ interface IInviteActivityView : MvpView {
 
     fun showText(text: String)
 
+    fun setDeviceId(deviceID: String)
+
     fun showQrCode(firebaseToken: String)
 
 }

@@ -43,7 +43,7 @@ class NavActivity : MvpAppCompatActivity(), INavView {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_invite -> {
-                title = "Invite"
+                title = "InviteRequest"
                 presenter.screenBtnClick(INVITE_SCREEN)
                 return@OnNavigationItemSelectedListener true
             }

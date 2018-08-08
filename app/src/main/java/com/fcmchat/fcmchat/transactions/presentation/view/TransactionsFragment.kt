@@ -1,10 +1,13 @@
 package com.fcmchat.fcmchat.transactions.presentation.view
 
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
 import com.arellomobile.mvp.MvpAppCompatDialogFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -22,6 +25,13 @@ class TransactionsFragment : MvpAppCompatDialogFragment(), ITransactionView {
     @InjectPresenter lateinit var presenter: AbstractTransactionPresenter
     @ProvidePresenter fun createPresenter(): AbstractTransactionPresenter = TransactionPresenter()
     @Inject lateinit var daggerPresenter: AbstractTransactionPresenter
+
+    @BindView(R.id.transactions_list) lateinit var transactionsList: RecyclerView
+    @OnClick(R.id.add_transaction) fun addTransactionBtnClick() = presenter.addTransactionBtnClick()
+
+    override fun showTransactionDialog() {
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ButterKnife.bind(view)

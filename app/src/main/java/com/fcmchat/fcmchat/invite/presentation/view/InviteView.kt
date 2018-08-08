@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -22,41 +23,37 @@ import butterknife.OnClick
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.fcmchat.fcmchat.R
-import com.fcmchat.fcmchat.invite.presentation.presenter.InviteActivityPresenter
+import com.fcmchat.fcmchat.invite.presentation.presenter.InvitePresenter
 import net.glxn.qrgen.android.QRCode
 
 class InviteView : MvpAppCompatFragment(), IInviteActivityView {
 
-    @InjectPresenter lateinit var presenter: InviteActivityPresenter
+    @InjectPresenter lateinit var presenter: InvitePresenter
 
     @Nullable @BindView(R.id.firebase_id_edit_text) lateinit var tokenEditText: EditText
-    @Nullable @BindView(R.id.message_edit_text) lateinit var messageEditText: EditText
+    @Nullable @BindView(R.id.device_id) lateinit var deviceIdTv: TextView
 
-    override fun showText(text: String) {
-        showMessage(text)
-    }
+    override fun showText(text: String) = showMessage(text)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.invite_fragment, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ButterKnife.bind(view)
+        ButterKnife.bind(this, view)
+        presenter.viewCreated()
     }
 
-    override fun onStop() {
-        super.onStop()
-        presenter.onStop()
-    }
-
-    @OnClick(R.id.imageButton) fun showQrCode() {
-        presenter.showQrCodeBtnClick()
-    }
+    @OnClick(R.id.imageButton) fun showQrCode() = presenter.showQrCodeBtnClick()
 
     @OnClick(R.id.qr_code_scanner_btn) fun showQrScanner() {
         if (hasCameraPermission()) {
             startActivityForResult(Intent(activity!!, ScannerActivity::class.java), 0)
         }
+    }
+
+    override fun setDeviceId(deviceID: String) {
+        deviceIdTv.text = deviceID
     }
 
     override fun showQrCode(firebaseToken: String) {
@@ -77,13 +74,11 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
         }
     }
 
-    @OnClick(R.id.send_message_btn) fun sendBtnClick() {
-        presenter.sendMessageBtnClick(tokenEditText.text.toString(), messageEditText.text.toString())
+    @OnClick(R.id.send_invitation_btn) fun sendInvitationBtnClick() {
+        presenter.sendInvitationBtnClick(tokenEditText.text.toString())
     }
 
-    private fun showMessage(text: String) {
-        Toast.makeText(activity!!, text, Toast.LENGTH_SHORT).show()
-    }
+    private fun showMessage(text: String) = Toast.makeText(activity!!, text, Toast.LENGTH_SHORT).show()
 
     private fun hasCameraPermission(): Boolean {
         val permissionState = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)

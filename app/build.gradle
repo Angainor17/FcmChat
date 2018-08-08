@@ -83,6 +83,7 @@ dependencies {
     implementation room.runtime
     implementation room.rxJava2
     kapt room.compiler
+    annotationProcessor room.compiler
     testImplementation room.test
 
     implementation retrofit.rxJavaAdapter

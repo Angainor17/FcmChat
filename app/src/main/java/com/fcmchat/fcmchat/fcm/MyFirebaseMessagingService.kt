@@ -1,10 +1,8 @@
 package com.fcmchat.fcmchat.fcm
 
-import com.fcmchat.fcmchat.debug
-import com.fcmchat.fcmchat.eventBus.NewMessageEvent
+import com.fcmchat.fcmchat.fcm.eventBus.EventFactory
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -16,8 +14,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
 
         if (remoteMessage != null && remoteMessage.data.isNotEmpty()) {
-            debug(Gson().toJson(remoteMessage.data))
-            EventBus.getDefault().post(NewMessageEvent(remoteMessage.data))
+            EventBus.getDefault().post(EventFactory.createMessageEvent(remoteMessage.data))
         }
     }
 }
