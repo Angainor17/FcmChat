@@ -4,7 +4,9 @@ import com.arellomobile.mvp.InjectViewState
 import com.fcmchat.fcmchat.app.App
 import com.fcmchat.fcmchat.chains.interactor.IChainsInteractor
 import com.fcmchat.fcmchat.chains.interactor.Microchain
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -25,7 +27,6 @@ class ChainsPresenter : AbstractChainsPresenter() {
 
     override fun addNewChainBtnClick() = viewState.showNewChainDialog()
 
-
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
@@ -38,9 +39,14 @@ class ChainsPresenter : AbstractChainsPresenter() {
     }
 
     private fun refreshList() {
-        compositeDisposable.add(interactor.getAllChains().subscribe({
-            setChainsItems(it)
-        }, { setChainsItems(ArrayList()) }))
+        compositeDisposable.add(interactor.getAllChains()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    setChainsItems(it)
+                }, {
+                    setChainsItems(ArrayList())
+                }))
     }
 
     private fun setChainsItems(list: ArrayList<Microchain>) {

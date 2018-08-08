@@ -13,10 +13,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import butterknife.OnClick
@@ -32,8 +33,14 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
 
     @Nullable @BindView(R.id.firebase_id_edit_text) lateinit var tokenEditText: EditText
     @Nullable @BindView(R.id.device_id) lateinit var deviceIdTv: TextView
+    @Nullable @BindView(R.id.chains_list_spinner) lateinit var chainsSpinner: Spinner
 
-    override fun showText(text: String) = showMessage(text)
+    override fun setChainsList(list: ArrayList<String>) {
+        val spinnerAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        chainsSpinner.adapter = spinnerAdapter
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.invite_fragment, container, false)
@@ -42,14 +49,6 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
         super.onViewCreated(view, savedInstanceState)
         ButterKnife.bind(this, view)
         presenter.viewCreated()
-    }
-
-    @OnClick(R.id.imageButton) fun showQrCode() = presenter.showQrCodeBtnClick()
-
-    @OnClick(R.id.qr_code_scanner_btn) fun showQrScanner() {
-        if (hasCameraPermission()) {
-            startActivityForResult(Intent(activity!!, ScannerActivity::class.java), 0)
-        }
     }
 
     override fun setDeviceId(deviceID: String) {
@@ -74,11 +73,35 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
         }
     }
 
-    @OnClick(R.id.send_invitation_btn) fun sendInvitationBtnClick() {
-        presenter.sendInvitationBtnClick(tokenEditText.text.toString())
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            showQrScanner()
+        }
     }
 
-    private fun showMessage(text: String) = Toast.makeText(activity!!, text, Toast.LENGTH_SHORT).show()
+    override fun showAlert(message: String) {
+        AlertDialog.Builder(context!!)
+                .setTitle("Alert!")
+                .setMessage(message)
+                .create()
+                .show()
+    }
+
+    @OnClick(R.id.send_invitation_btn) fun sendInvitationBtnClick() {
+        presenter.sendInvitationBtnClick(
+                tokenEditText.text.toString(),
+                chainsSpinner.selectedItem as String
+        )
+    }
+
+    @OnClick(R.id.imageButton) fun showQrCode() = presenter.showQrCodeBtnClick()
+
+    @OnClick(R.id.qr_code_scanner_btn) fun showQrScanner() {
+        if (hasCameraPermission()) {
+            startActivityForResult(Intent(activity!!, ScannerActivity::class.java), 0)
+        }
+    }
 
     private fun hasCameraPermission(): Boolean {
         val permissionState = ContextCompat.checkSelfPermission(activity!!, Manifest.permission.CAMERA)
@@ -92,15 +115,8 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
 
     private fun requestCameraPermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity!!, Manifest.permission.CAMERA)) {
-            showMessage("No Camera Permission")
+            showAlert("No Camera Permission")
         } else
             ActivityCompat.requestPermissions(activity!!, arrayOf(Manifest.permission.CAMERA), 0)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            showQrScanner()
-        }
     }
 }

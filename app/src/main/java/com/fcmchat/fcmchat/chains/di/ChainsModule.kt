@@ -17,8 +17,6 @@ class ChainsModule {
 
     @Provides fun createPresenter(): AbstractChainsPresenter = ChainsPresenter()
 
-    @Provides fun createRepo(): IChainsRepo = ChainsRepo()
-
     @Provides fun createInteractor(): IChainsInteractor = ChainsInteractor()
 
 }

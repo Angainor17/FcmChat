@@ -1,6 +1,7 @@
 package com.fcmchat.fcmchat.app.di
 
 import android.content.Context
+import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.db.AppDatabase
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
 import dagger.Component
@@ -18,5 +19,6 @@ interface AppComponent {
     fun getRouter(): Router
     fun getDatabase(): AppDatabase
     fun getFcmRepo(): IFcmRepo
+    fun getChainRepo(): IChainsRepo
 
 }

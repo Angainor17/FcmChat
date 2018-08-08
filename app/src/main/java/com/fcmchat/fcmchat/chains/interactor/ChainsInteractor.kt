@@ -27,7 +27,7 @@ class ChainsInteractor : IChainsInteractor {
                 it.sortBy { -it.id }
                 it.forEach { list.add(Microchain(it.name)) }
                 list
-            }.observeOn(AndroidSchedulers.mainThread())
+            }.observeOn(AndroidSchedulers.mainThread()).firstOrError()
 
     override fun addNewChain(chain: Microchain) {
         val chainEntity = ChainEntity()

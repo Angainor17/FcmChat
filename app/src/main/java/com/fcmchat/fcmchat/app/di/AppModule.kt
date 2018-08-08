@@ -2,6 +2,8 @@ package com.fcmchat.fcmchat.app.di
 
 import android.arch.persistence.room.Room
 import android.content.Context
+import com.fcmchat.fcmchat.chains.data.ChainsRepo
+import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.db.AppDatabase
 import com.fcmchat.fcmchat.fcm.repo.FcmRepo
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
@@ -34,5 +36,7 @@ class AppModule(private val context: Context) {
     @Provides fun getRouter(): Router = cicerone.router
 
     @Provides fun getFcmRepository(): IFcmRepo = fcmRepo
+
+    @Provides fun createRepo(): IChainsRepo = ChainsRepo()
 
 }

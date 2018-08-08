@@ -2,18 +2,26 @@ package com.fcmchat.fcmchat.invite.presentation.view
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
+import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 /**
  * Created by Voronin Igor on 16.07.2018.
  */
-@StateStrategyType(AddToEndSingleStrategy::class)
+
 interface IInviteActivityView : MvpView {
 
-    fun showText(text: String)
-
+//    @StateStrategyType(AddToEndStrategy::class)
     fun setDeviceId(deviceID: String)
 
+    @StateStrategyType(SkipStrategy::class)
     fun showQrCode(firebaseToken: String)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun showAlert(message: String)
+
+    @StateStrategyType(SkipStrategy::class)
+    fun setChainsList(list: ArrayList<String>)
 
 }

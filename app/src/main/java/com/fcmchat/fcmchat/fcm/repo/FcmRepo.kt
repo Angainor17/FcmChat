@@ -16,7 +16,7 @@ class FcmRepo(context: Context) : IFcmRepo {
 
     companion object {
         const val FCM_KEY = "fcm_key"
-        const val USER_NAME = "fcm_key"
+        const val USER_NAME = "fcm_name"
     }
 
     private val fcmServer: FcmServer = FcmServerFactory.createServer()
@@ -27,7 +27,7 @@ class FcmRepo(context: Context) : IFcmRepo {
     override fun sendTo(key: String, message: String) = fcmServer.sendPushTo(FcmMessage(message, key))
 
     override fun getFcmKey(): String {
-        var key = sharedPreferences.getString(FCM_KEY, "")
+        var key = sharedPreferences.getString(FCM_KEY, "")!!
         if (key.isEmpty()) {
             key = FirebaseInstanceId.getInstance().token.toString()
             sharedPreferences.edit().putString(FCM_KEY, key).apply()
@@ -36,7 +36,7 @@ class FcmRepo(context: Context) : IFcmRepo {
     }
 
     override fun getUserName(): String {
-        var userName = sharedPreferences.getString(USER_NAME, "")
+        var userName = sharedPreferences.getString(USER_NAME, "")!!
         if (userName.isEmpty()) {
             userName = createUserName()
             sharedPreferences.edit().putString(USER_NAME, userName).apply()

@@ -1,7 +1,10 @@
 package com.fcmchat.fcmchat.invite.business
 
 import com.fcmchat.fcmchat.app.App
+import com.fcmchat.fcmchat.chains.data.IChainsRepo
+import com.fcmchat.fcmchat.chains.interactor.Microchain
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -10,6 +13,7 @@ import javax.inject.Inject
 class InviteInteractor : IInviteInteractor {
 
     @Inject lateinit var fcmRepo: IFcmRepo
+    @Inject lateinit var chainsRepo: IChainsRepo
 
     init {
         App.injector.inviteComponent.inject(this)
@@ -24,5 +28,8 @@ class InviteInteractor : IInviteInteractor {
     override fun subscribeToTopic(topicName: String) = fcmRepo.subscribeToTopic(topicName)
 
     override fun getCurrentUser() = User(name = fcmRepo.getUserName(), key = fcmRepo.getFcmKey())
+
+    override fun getChains(): Flowable<ArrayList<Microchain>> =
+            chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }
 
 }
