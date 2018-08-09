@@ -40,6 +40,6 @@ class NavPresenter : INavPresenter() {
         interactor.acceptInvitation(request)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe()
+                .subscribe({ }) { _ -> }
     }
 }

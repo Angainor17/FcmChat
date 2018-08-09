@@ -47,7 +47,7 @@ class InvitePresenter : MvpPresenter<IInviteActivityView>() {
         compositeDisposable.add(interactor.sendInvitation(key, getMicroChain(chainName)!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe()
+                .subscribe({ }) { _ -> }
         )
     }
 
