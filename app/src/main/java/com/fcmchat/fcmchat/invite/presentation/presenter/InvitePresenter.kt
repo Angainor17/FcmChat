@@ -4,10 +4,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.fcmchat.fcmchat.app.App
 import com.fcmchat.fcmchat.chains.interactor.Microchain
-import com.fcmchat.fcmchat.fcm.models.InviteRequest
 import com.fcmchat.fcmchat.invite.business.IInviteInteractor
 import com.fcmchat.fcmchat.invite.presentation.view.IInviteActivityView
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -46,9 +44,7 @@ class InvitePresenter : MvpPresenter<IInviteActivityView>() {
             return
         }
 
-        val inviteReqString = Gson().toJson(createInviteMessage(getMicroChain(chainName)!!))!!
-
-        compositeDisposable.add(interactor.sendMessageTo(key, inviteReqString)
+        compositeDisposable.add(interactor.sendInvitation(key, getMicroChain(chainName)!!)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe()
@@ -69,7 +65,6 @@ class InvitePresenter : MvpPresenter<IInviteActivityView>() {
         firebaseToken = interactor.getFcmKey()
     }
 
-    private fun createInviteMessage(microChain: Microchain) = InviteRequest(interactor.getCurrentUser(), microChain)
 
     private fun initDbListeners() {
         compositeDisposable.add(interactor.getChains()

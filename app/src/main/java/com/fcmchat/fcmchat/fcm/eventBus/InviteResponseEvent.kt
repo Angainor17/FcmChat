@@ -6,13 +6,13 @@ import com.google.gson.Gson
 /**
  * Created by Voronin Igor on 08.08.2018.
  */
-class InviteRequestEvent : Event() {
+class InviteResponseEvent : Event() {
 
     var chainName = ""
     var userName = ""
     var userKey = ""
 
-    override fun getKey() = "invite_request"
+    override fun getKey() = "invite_response"
 
     override fun setMap(map: Map<String, String>) {
         val inviteReqParams = Gson().fromJson(map[getKey()], InviteRequestParams::class.java)!!

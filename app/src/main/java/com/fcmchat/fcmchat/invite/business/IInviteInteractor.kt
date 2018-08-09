@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 interface IInviteInteractor {
 
     fun sendMessageAll(message: String, topicName: String): Completable
-    fun sendMessageTo(key: String, message: String): Completable
+    fun sendInvitation(key: String, microchain: Microchain): Completable
     fun getFcmKey(): String
     fun subscribeToTopic(topicName: String)
     fun getCurrentUser(): User

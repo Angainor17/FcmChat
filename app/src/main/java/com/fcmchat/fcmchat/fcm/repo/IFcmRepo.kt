@@ -8,7 +8,7 @@ import io.reactivex.Completable
 interface IFcmRepo {
 
     fun notifyAll(message: String, topicName: String): Completable
-    fun sendTo(key: String, message: String): Completable
+    fun sendTo(key: String, paramName: String,message: String): Completable
 
     fun subscribeToTopic(topicName: String)
 

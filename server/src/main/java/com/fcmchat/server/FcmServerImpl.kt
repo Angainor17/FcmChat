@@ -35,7 +35,7 @@ internal class FcmServerImpl : FcmServer {
     override fun sendPushTo(message: FcmMessage): Completable = Completable.create {
         try {
             FirebaseMessaging.getInstance().send(Message.builder()
-                    .putData(FcmServer.DATA_KEY, message.messageText)
+                    .putData(message.paramName, message.messageText)
                     .setAndroidConfig(AndroidConfig.builder()
                             .setPriority(AndroidConfig.Priority.HIGH)
                             .build())
@@ -50,7 +50,7 @@ internal class FcmServerImpl : FcmServer {
     override fun sendPushAll(message: FcmMessage, topicName: String): Completable = Completable.create {
         try {
             FirebaseMessaging.getInstance().send(Message.builder()
-                    .putData(FcmServer.DATA_KEY, message.messageText)
+                    .putData(message.paramName, message.messageText)
                     .setAndroidConfig(AndroidConfig.builder()
                             .setPriority(AndroidConfig.Priority.HIGH)
                             .build())

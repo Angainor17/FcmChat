@@ -2,7 +2,11 @@ package com.fcmchat.fcmchat.router.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.fcmchat.fcmchat.app.App
+import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
+import com.fcmchat.fcmchat.router.interactor.INavInteractor
 import com.fcmchat.fcmchat.router.presentation.view.NavActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -15,6 +19,7 @@ class NavPresenter : INavPresenter() {
 
     @Inject lateinit var router: Router
     @Inject lateinit var navigatorHolder: NavigatorHolder
+    @Inject lateinit var interactor: INavInteractor
 
     private var isFirstNavigatorInit = true
 
@@ -29,7 +34,12 @@ class NavPresenter : INavPresenter() {
         }
     }
 
-    override fun screenBtnClick(key: String) {
-        router.navigateTo(key, 0)
+    override fun screenBtnClick(key: String) = router.navigateTo(key, 0)
+
+    override fun acceptInvitation(request: InviteRequestEvent) {
+        interactor.acceptInvitation(request)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe()
     }
 }

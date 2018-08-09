@@ -6,7 +6,10 @@ package com.fcmchat.fcmchat.fcm.eventBus
 class EventFactory {
     companion object {
         fun createMessageEvent(map: Map<String, String>): Event {
-            val events = arrayOf(DataUpdateMessage(), InviteRequestEvent())
+            val events = arrayOf(
+                    DataUpdateMessage(),
+                    InviteRequestEvent(),
+                    InviteResponseEvent())
 
             events.forEach {
                 if (it.isTypeMatch(map)) {
