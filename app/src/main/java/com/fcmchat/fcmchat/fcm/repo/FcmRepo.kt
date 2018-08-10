@@ -17,12 +17,16 @@ class FcmRepo(context: Context) : IFcmRepo {
     companion object {
         const val FCM_KEY = "fcm_key"
         const val USER_NAME = "fcm_name"
+        const val SHARED_PREFERENCES_NAME = "fcm"
     }
 
     private val fcmServer: FcmServer = FcmServerFactory.createServer()
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("fcm", Context.MODE_PRIVATE)
 
-    override fun notifyAll(message: String, topicName: String) = fcmServer.sendPushAll(FcmMessage(message), topicName)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
+
+    override fun notifyAll(paramName: String, message: String, topicName: String) =
+        fcmServer.sendPushAll(FcmMessage(message, paramName = paramName), topicName)
+
 
     override fun sendTo(key: String, paramName: String, message: String) = fcmServer.sendPushTo(
             FcmMessage(message, key, paramName)

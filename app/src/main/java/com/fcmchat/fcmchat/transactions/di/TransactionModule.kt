@@ -1,7 +1,5 @@
 package com.fcmchat.fcmchat.transactions.di
 
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
-import com.fcmchat.fcmchat.transactions.data.TransactionRepo
 import com.fcmchat.fcmchat.transactions.interactor.ITransactionInteractor
 import com.fcmchat.fcmchat.transactions.interactor.TransactionInteractor
 import com.fcmchat.fcmchat.transactions.presentation.presenter.AbstractTransactionPresenter
@@ -16,8 +14,6 @@ import dagger.Provides
 class TransactionModule {
 
     @Provides fun createPresenter(): AbstractTransactionPresenter = TransactionPresenter()
-
-    @Provides fun createRepo(): ITransactionRepo = TransactionRepo()
 
     @Provides fun createInteractor(): ITransactionInteractor = TransactionInteractor()
 

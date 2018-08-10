@@ -7,6 +7,8 @@ import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.db.AppDatabase
 import com.fcmchat.fcmchat.fcm.repo.FcmRepo
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
+import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
+import com.fcmchat.fcmchat.transactions.data.TransactionRepo
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -22,21 +24,16 @@ class AppModule(private val context: Context) {
 
     private val cicerone: Cicerone<Router> = Cicerone.create()
     private var fcmRepo: IFcmRepo = FcmRepo(context)
+    private var db: AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "database")
+            .allowMainThreadQueries()
+            .build()
 
-
-    @Provides fun getDb() =
-            Room.databaseBuilder(context, AppDatabase::class.java, "database")
-                    .allowMainThreadQueries()
-                    .build()
-
+    @Provides fun getDb() = db
     @Provides fun context() = context
-
     @Provides fun getNavigatorHolder(): NavigatorHolder = cicerone.navigatorHolder
-
     @Provides fun getRouter(): Router = cicerone.router
-
     @Provides fun getFcmRepository(): IFcmRepo = fcmRepo
-
-    @Provides fun createRepo(): IChainsRepo = ChainsRepo()
+    @Provides fun createChainsRepo(): IChainsRepo = ChainsRepo()
+    @Provides fun createTransactionRepo(): ITransactionRepo = TransactionRepo()
 
 }

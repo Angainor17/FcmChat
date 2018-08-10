@@ -1,8 +1,8 @@
 package com.fcmchat.fcmchat.transactions.data
 
-import android.content.Context
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
+import com.fcmchat.fcmchat.db.AppDatabase
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -10,9 +10,13 @@ import javax.inject.Inject
  */
 class TransactionRepo : ITransactionRepo {
 
-    @Inject lateinit var context: Context
+    @Inject lateinit var db: AppDatabase
 
     init {
         App.injector.transactionComponent.inject(this)
     }
+
+    override fun addTransaction(newEntity: TransactionEntity) = db.transactionDao().insert(newEntity)
+
+    override fun getTransaction(): Flowable<List<TransactionEntity>> = db.transactionDao().getAll()
 }

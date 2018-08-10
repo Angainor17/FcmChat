@@ -4,6 +4,7 @@ import android.content.Context
 import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.db.AppDatabase
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
+import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
 import dagger.Component
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -20,5 +21,6 @@ interface AppComponent {
     fun getDatabase(): AppDatabase
     fun getFcmRepo(): IFcmRepo
     fun getChainRepo(): IChainsRepo
+    fun getTransactionsRepo(): ITransactionRepo
 
 }

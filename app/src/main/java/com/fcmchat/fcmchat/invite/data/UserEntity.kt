@@ -15,6 +15,8 @@ class UserEntity {
     @ColumnInfo(name = "name") var name: String = ""
     @ColumnInfo(name = "key") var key: String = ""
     @ColumnInfo(name = "policy") var policy: Int = SEND_AND_INVITE_POLICY
+    @ColumnInfo(name = "chain_id") var chainId: Long = 0
+    @ColumnInfo(name = "chain_name") var chainName: String = ""
 
     companion object {
         @Ignore const val READ_ONLY_POLICY = 1

@@ -25,8 +25,6 @@ class InviteInteractor : IInviteInteractor {
         debug(getFcmKey())
     }
 
-    override fun sendMessageAll(message: String, topicName: String) = fcmRepo.notifyAll(message, topicName)
-
     override fun sendInvitation(key: String, microchain: Microchain): Completable {
         val inviteRequest = InviteRequestParams(getCurrentUser(), microchain)
         val message = Gson().toJson(inviteRequest)

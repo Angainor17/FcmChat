@@ -7,7 +7,7 @@ class EventFactory {
     companion object {
         fun createMessageEvent(map: Map<String, String>): Event {
             val events = arrayOf(
-                    DataUpdateMessage(),
+                    TransactionEvent(),
                     InviteRequestEvent(),
                     InviteResponseEvent())
 

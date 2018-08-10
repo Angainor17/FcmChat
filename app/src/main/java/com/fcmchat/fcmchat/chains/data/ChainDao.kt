@@ -20,6 +20,9 @@ interface ChainDao {
     @Query("SELECT * FROM microchain WHERE id = :id")
     fun getById(id: Long): Flowable<ChainEntity?>?
 
+    @Query("SELECT * FROM microchain WHERE name = :name")
+    fun getByName(name: String): Single<ChainEntity>
+
     @Insert fun insert(chain: ChainEntity)
     @Update fun update(chain: ChainEntity)
     @Delete fun delete(chain: ChainEntity)

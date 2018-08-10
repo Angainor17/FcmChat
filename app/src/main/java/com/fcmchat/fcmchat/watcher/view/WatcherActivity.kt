@@ -1,30 +1,31 @@
-package com.fcmchat.fcmchat.router.presentation.view
+package com.fcmchat.fcmchat.watcher.view
 
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.CheckBox
 import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.fcmchat.fcmchat.R
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
 import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
+import com.fcmchat.fcmchat.fcm.eventBus.TransactionEvent
+import com.fcmchat.fcmchat.watcher.presenter.IWatcherPresenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import javax.inject.Inject
 
 /**
  * Created by Voronin Igor on 09.08.2018.
  */
-abstract class MainActivity : MvpAppCompatActivity() {
+abstract class WatcherActivity : MvpAppCompatActivity() {
 
-    override fun onStop() {
-        super.onStop()
-        EventBus.getDefault().unregister(this)
-    }
+    @Inject lateinit var watcherPresenter: IWatcherPresenter
 
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    fun inviteRequest(request: TransactionEvent) {
+        watcherPresenter.transactionEvent(request)
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -32,6 +33,21 @@ abstract class MainActivity : MvpAppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun inviteResponse(response: InviteResponseEvent) = showInviteResponseAlertDialog(response)
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    override fun onDestroy() {
+        watcherPresenter.onDestroy()
+        super.onDestroy()
+    }
 
     private fun showInviteResponseAlertDialog(response: InviteResponseEvent) {
         val view = createResponseInviteView(response)
@@ -51,20 +67,24 @@ abstract class MainActivity : MvpAppCompatActivity() {
         return view
     }
 
-    abstract fun newUserAdded(view: View, response: InviteResponseEvent)
+    private fun newUserAdded(view: View, response: InviteResponseEvent) {
+        val isCanSend = view.findViewById<CheckBox>(R.id.send_check_box).isChecked
+        val isCanInvite = view.findViewById<CheckBox>(R.id.invite_check_box).isChecked
 
-    abstract fun acceptInvitation(request: InviteRequestEvent)
-
-    private fun showReqAlertDialog(request: InviteRequestEvent) {
-        val view = createReqInviteView(request)
-
-        AlertDialog.Builder(this)
-                .setView(view)
-                .setPositiveButton("Accept") { _, _ -> acceptInvitation(request) }
-                .setNegativeButton("Cancel") { _, _ -> }
-                .create()
-                .show()
+        watcherPresenter.newUserAddToChain(response, isCanSend, isCanInvite)
     }
+
+    private fun acceptInvitation(request: InviteRequestEvent) {
+        watcherPresenter.acceptInvitation(request)
+    }
+
+    private fun showReqAlertDialog(request: InviteRequestEvent) =
+            AlertDialog.Builder(this)
+                    .setView(createReqInviteView(request))
+                    .setPositiveButton("Accept") { _, _ -> acceptInvitation(request) }
+                    .setNegativeButton("Cancel") { _, _ -> }
+                    .create()
+                    .show()
 
     private fun createReqInviteView(request: InviteRequestEvent): View {
         val view = LayoutInflater.from(this).inflate(R.layout.invite_alert_dialog, null, false)

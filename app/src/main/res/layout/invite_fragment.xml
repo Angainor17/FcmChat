@@ -98,7 +98,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chains_list_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/chains_list_spinner_container"
         app:srcCompat="@drawable/ic_wallpaper_black_24dp" />
 
     <Button
@@ -132,9 +132,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firebase_id_edit_text_container" />
 
-    <Spinner
-        android:id="@+id/chains_list_spinner"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
+
+    <LinearLayout
+        android:id="@+id/chains_list_spinner_container"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -142,11 +143,13 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:minWidth="100dp"
-
-        android:spinnerMode="dialog"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/send_invitation_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/send_invitation_btn">
+
+        <include layout="@layout/chain_spinner" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

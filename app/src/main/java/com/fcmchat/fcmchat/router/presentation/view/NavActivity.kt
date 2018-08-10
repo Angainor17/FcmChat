@@ -5,18 +5,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.view.View
-import android.widget.CheckBox
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.fcmchat.fcmchat.R
 import com.fcmchat.fcmchat.app.App
 import com.fcmchat.fcmchat.chains.presentation.view.ChainsFragment
-import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
-import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
 import com.fcmchat.fcmchat.invite.presentation.view.InviteView
 import com.fcmchat.fcmchat.router.presentation.presenter.INavPresenter
 import com.fcmchat.fcmchat.transactions.presentation.view.TransactionsFragment
+import com.fcmchat.fcmchat.watcher.view.WatcherActivity
 import kotlinx.android.synthetic.main.activity_navigation.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -24,7 +21,7 @@ import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.SupportAppNavigator
 import javax.inject.Inject
 
-class NavActivity : MainActivity(), INavView {
+class NavActivity : WatcherActivity(), INavView {
 
     companion object {
         const val INVITE_SCREEN = "inviteScreen"
@@ -64,23 +61,12 @@ class NavActivity : MainActivity(), INavView {
         false
     }
 
-    override fun newUserAdded(view: View, response: InviteResponseEvent) {
-        val isCanSend = view.findViewById<CheckBox>(R.id.send_check_box).isChecked
-        val isCanInvite = view.findViewById<CheckBox>(R.id.invite_check_box).isChecked
-
-        presenter.newUserAddToChain(response, isCanSend, isCanInvite)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         App.injector.navComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-    }
-
-    override fun acceptInvitation(request: InviteRequestEvent) {
-        presenter.acceptInvitation(request)
     }
 
     override fun onResume() {

@@ -1,9 +1,10 @@
 package com.fcmchat.fcmchat.router.di
 
 import com.fcmchat.fcmchat.app.di.AppComponent
-import com.fcmchat.fcmchat.router.interactor.NavInteractor
 import com.fcmchat.fcmchat.router.presentation.presenter.NavPresenter
 import com.fcmchat.fcmchat.router.presentation.view.NavActivity
+import com.fcmchat.fcmchat.watcher.interactor.WatcherInteractor
+import com.fcmchat.fcmchat.watcher.presenter.WatcherPresenter
 import dagger.Component
 
 /**
@@ -13,7 +14,8 @@ import dagger.Component
 interface NavComponent {
 
     fun inject(view: NavActivity)
+    fun inject(presenter: WatcherPresenter)
     fun inject(presenter: NavPresenter)
-    fun inject(interactor: NavInteractor)
+    fun inject(interactor: WatcherInteractor)
 
 }
