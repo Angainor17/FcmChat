@@ -26,6 +26,7 @@ class TransactionInteractor : ITransactionInteractor {
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(Schedulers.io())
                     .map { ArrayList(it.map { TransactionItem(it!!) }) }
+                    .map { ArrayList(it.filter { it.chainName == chain.chainName }) }
 
     override fun getChains(): Flowable<ArrayList<Microchain>> =
             chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }

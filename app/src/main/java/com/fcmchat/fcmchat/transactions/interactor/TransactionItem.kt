@@ -8,5 +8,6 @@ import com.fcmchat.fcmchat.transactions.data.TransactionEntity
 class TransactionItem(
         transactionEntity: TransactionEntity,
         val type: String = transactionEntity.type,
-        val message: String = transactionEntity.data
+        val message: String = transactionEntity.data,
+        val chainName: String = transactionEntity.chainName
 )
