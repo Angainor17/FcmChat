@@ -31,8 +31,6 @@ class InviteInteractor : IInviteInteractor {
         val inviteRequest = InviteRequestParams(getCurrentUser(), microchain)
         val message = Gson().toJson(inviteRequest)
 
-        debug(getFcmKey())//fixme
-
         return fcmRepo.sendTo(key, InviteRequestEvent().getKey(), message)
     }
 

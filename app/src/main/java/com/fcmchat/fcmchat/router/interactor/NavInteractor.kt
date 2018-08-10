@@ -26,4 +26,15 @@ class NavInteractor : INavInteractor {
 
         return fcmRepo.sendTo(request.userKey, InviteResponseEvent().getKey(), Gson().toJson(response))
     }
+
+    override fun newUserAddToChain(response: InviteResponseEvent, sendFlag: Boolean, inviteFlag: Boolean) {
+        if (response.result != UserEntity.OK_RESULT) {
+            return
+        }
+
+        val userEntity = UserEntity()
+        userEntity.key = response.userKey
+        userEntity.name = response.userName
+        userEntity.policy = UserEntity.getPolicy(sendFlag, inviteFlag)
+    }
 }

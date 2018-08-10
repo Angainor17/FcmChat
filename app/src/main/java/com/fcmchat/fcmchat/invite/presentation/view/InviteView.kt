@@ -91,7 +91,7 @@ class InviteView : MvpAppCompatFragment(), IInviteActivityView {
     @Nullable @OnClick(R.id.send_invitation_btn) fun sendInvitationBtnClick() {
         presenter.sendInvitationBtnClick(
                 tokenEditText.text.toString(),
-                chainsSpinner?.selectedItem?.toString()
+                chainsSpinner.selectedItem?.toString()
         )
     }
 

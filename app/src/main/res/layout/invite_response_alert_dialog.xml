@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/header"
@@ -22,31 +22,32 @@
 
 
     <CheckBox
-        android:id="@+id/invite_chip"
+        android:id="@+id/invite_check_box"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:checked="true"
         android:text="Invite"
-        app:layout_constraintEnd_toStartOf="@+id/send_chip"
+        app:layout_constraintEnd_toStartOf="@+id/send_check_box"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <CheckBox
-        android:id="@+id/send_chip"
+        android:id="@+id/send_check_box"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:checked="true"
         android:text="Send"
-
-        tools:checked="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/invite_chip"
-        app:layout_constraintTop_toTopOf="@+id/invite_chip" />
+        app:layout_constraintStart_toEndOf="@+id/invite_check_box"
+        app:layout_constraintTop_toTopOf="@+id/invite_check_box"
+        tools:checked="true" />
 
 
     <android.support.constraint.ConstraintLayout
@@ -59,7 +60,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/invite_chip"
+        app:layout_constraintBottom_toTopOf="@+id/invite_check_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/header">

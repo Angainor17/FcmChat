@@ -3,6 +3,7 @@ package com.fcmchat.fcmchat.router.presentation.presenter
 import com.arellomobile.mvp.InjectViewState
 import com.fcmchat.fcmchat.app.App
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
+import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
 import com.fcmchat.fcmchat.router.interactor.INavInteractor
 import com.fcmchat.fcmchat.router.presentation.view.NavActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -42,4 +43,7 @@ class NavPresenter : INavPresenter() {
                 .subscribeOn(Schedulers.io())
                 .subscribe({ }) { _ -> }
     }
+
+    override fun newUserAddToChain(response: InviteResponseEvent, sendFlag: Boolean, inviteFlag: Boolean) =
+            interactor.newUserAddToChain(response, sendFlag, inviteFlag)
 }

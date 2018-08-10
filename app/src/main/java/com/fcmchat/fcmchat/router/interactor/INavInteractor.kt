@@ -1,6 +1,7 @@
 package com.fcmchat.fcmchat.router.interactor
 
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
+import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
 import io.reactivex.Completable
 
 /**
@@ -9,5 +10,5 @@ import io.reactivex.Completable
 interface INavInteractor {
 
     fun acceptInvitation(request: InviteRequestEvent): Completable
-
+    fun newUserAddToChain(response: InviteResponseEvent, sendFlag: Boolean, inviteFlag: Boolean)
 }

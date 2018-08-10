@@ -22,6 +22,10 @@ class UserEntity {
         @Ignore const val SEND_POLICY = 4
         @Ignore const val SEND_AND_INVITE_POLICY = 5
 
+        fun getPolicy(sendFlag: Boolean, inviteFlag: Boolean) =
+                if (sendFlag) if (inviteFlag) SEND_AND_INVITE_POLICY else SEND_POLICY
+                else if (inviteFlag) INVITE_POLICY else READ_ONLY_POLICY
+
         @Ignore const val OK_RESULT = 0
         @Ignore const val DECLINED_RESULT = 1
     }

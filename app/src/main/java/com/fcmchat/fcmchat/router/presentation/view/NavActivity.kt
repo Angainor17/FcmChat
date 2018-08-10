@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.View
-import android.widget.Toast
+import android.widget.CheckBox
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.fcmchat.fcmchat.R
@@ -65,7 +65,10 @@ class NavActivity : MainActivity(), INavView {
     }
 
     override fun newUserAdded(view: View, response: InviteResponseEvent) {
-        Toast.makeText(this, "Add New User", Toast.LENGTH_LONG).show()//fixme
+        val isCanSend = view.findViewById<CheckBox>(R.id.send_check_box).isChecked
+        val isCanInvite = view.findViewById<CheckBox>(R.id.invite_check_box).isChecked
+
+        presenter.newUserAddToChain(response, isCanSend, isCanInvite)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
