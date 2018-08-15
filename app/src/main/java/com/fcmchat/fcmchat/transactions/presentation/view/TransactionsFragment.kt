@@ -40,7 +40,7 @@ class TransactionsFragment : MvpAppCompatDialogFragment(), ITransactionView {
     private var adapter: TransactionsListAdapter? = null
 
     override fun showTransactionDialog() {
-        TODO("impl")
+//        TODO("impl")
     }
 
     override fun setChainsList(list: ArrayList<String>) {

@@ -2,9 +2,7 @@ package com.fcmchat.fcmchat.app
 
 import android.support.multidex.MultiDexApplication
 import com.fcmchat.fcmchat.app.di.Injector
-import com.fcmchat.server.FcmServerFactory
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
+import com.fcmchat.server.di.ServerInjector
 
 
 /**
@@ -17,9 +15,9 @@ class App : MultiDexApplication() {
     }
 
     override fun onCreate() {
-        FcmServerFactory.init(this)
-        injector = Injector(this)
         super.onCreate()
+        ServerInjector.init(this)
+        injector = Injector(this)
 
     }
 }

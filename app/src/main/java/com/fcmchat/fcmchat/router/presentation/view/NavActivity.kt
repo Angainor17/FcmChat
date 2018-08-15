@@ -13,7 +13,6 @@ import com.fcmchat.fcmchat.chains.presentation.view.ChainsFragment
 import com.fcmchat.fcmchat.invite.presentation.view.InviteView
 import com.fcmchat.fcmchat.router.presentation.presenter.INavPresenter
 import com.fcmchat.fcmchat.transactions.presentation.view.TransactionsFragment
-import com.fcmchat.fcmchat.watcher.view.WatcherActivity
 import kotlinx.android.synthetic.main.activity_navigation.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder

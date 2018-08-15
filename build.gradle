@@ -40,12 +40,13 @@ buildscript {
     ]
 
     ext.support = [
-            appcompat7        : "com.android.support:appcompat-v7:$versions.support_library",
-            recyclerview      : "com.android.support:recyclerview-v7:$versions.support_library",
-            constraintLayout  : "com.android.support.constraint:constraint-layout:$versions.constraint_layout",
-            supportAnnotations: "com.android.support:support-annotations:$versions.support_library",
-            design            : "com.android.support:design:$versions.support_library",
-            multidex          : "com.android.support:multidex:$versions.multidex"
+            appcompat7           : "com.android.support:appcompat-v7:$versions.support_library",
+            recyclerview         : "com.android.support:recyclerview-v7:$versions.support_library",
+            constraintLayout     : "com.android.support.constraint:constraint-layout:$versions.constraint_layout",
+            supportAnnotations   : "com.android.support:support-annotations:$versions.support_library",
+            design               : "com.android.support:design:$versions.support_library",
+            multidex             : "com.android.support:multidex:$versions.multidex",
+            supportVectorDrawable: "com.android.support:support-vector-drawable:$versions.support_library"
     ]
 
     ext.rx = [

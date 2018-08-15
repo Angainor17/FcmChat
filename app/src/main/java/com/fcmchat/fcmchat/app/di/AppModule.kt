@@ -1,14 +1,9 @@
 package com.fcmchat.fcmchat.app.di
 
-import android.arch.persistence.room.Room
 import android.content.Context
-import com.fcmchat.fcmchat.chains.data.ChainsRepo
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
-import com.fcmchat.fcmchat.db.AppDatabase
-import com.fcmchat.fcmchat.fcm.repo.FcmRepo
-import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
-import com.fcmchat.fcmchat.transactions.data.TransactionRepo
+import com.fcmchat.fcmchat.server.watcher.interactor.IWatcherInteractor
+import com.fcmchat.server.di.ServerInjector
+import com.fcmchat.server.fcm.repo.IFcmRepo
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -23,17 +18,13 @@ import ru.terrakok.cicerone.Router
 class AppModule(private val context: Context) {
 
     private val cicerone: Cicerone<Router> = Cicerone.create()
-    private var fcmRepo: IFcmRepo = FcmRepo(context)
-    private var db: AppDatabase = Room.databaseBuilder(context, AppDatabase::class.java, "database")
-            .allowMainThreadQueries()
-            .build()
+    private var fcmRepo: IFcmRepo = ServerInjector.createFcmServer()
+    private var watcherInteractor: IWatcherInteractor = ServerInjector.createInteractor()
 
-    @Provides fun getDb() = db
     @Provides fun context() = context
     @Provides fun getNavigatorHolder(): NavigatorHolder = cicerone.navigatorHolder
     @Provides fun getRouter(): Router = cicerone.router
     @Provides fun getFcmRepository(): IFcmRepo = fcmRepo
-    @Provides fun createChainsRepo(): IChainsRepo = ChainsRepo()
-    @Provides fun createTransactionRepo(): ITransactionRepo = TransactionRepo()
+    @Provides fun getWatcherInteractor(): IWatcherInteractor = watcherInteractor
 
 }

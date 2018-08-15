@@ -65,6 +65,11 @@ android {
     kapt {
         generateStubs = true
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -74,6 +79,11 @@ dependencies {
         exclude group: 'com.google', module: 'firebase'
         exclude group: 'com.google.firebase', module: 'firebase-admin'
         exclude group: 'com.google.firebase', module: 'firebase'
+//        exclude group: 'android.arch.core', module: 'runtime'
+        exclude group: 'android.arch.persistence.room', module: 'runtime'
+        exclude group: 'android.arch.persistence.room', module: 'testing'
+        exclude group: 'android.arch.persistence.room', module: 'compiler'
+        exclude group: 'android.arch.persistence.room', module: 'rxjava2'
     }
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
@@ -82,8 +92,24 @@ dependencies {
     implementation support.appcompat7
     implementation support.recyclerview
     implementation support.constraintLayout
+    implementation support.supportVectorDrawable
 
-    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    kapt butterknife.butterknifeCompiler
+    implementation butterknife.butterknife
+
+    kapt dagger.daggerCompiler
+    implementation dagger.dagger
+    annotationProcessor dagger.daggerCompiler
+
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'com.github.kenglxn.QRGen:android:2.5.0'
+    implementation 'me.dm7.barcodescanner:zbar:1.8.4'
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    kapt moxy.moxyCompiler
+    implementation moxy.moxy
+    implementation moxy.moxyCompat
+    annotationProcessor moxy.moxyCompiler
 
     implementation rx.java
     implementation rx.android
@@ -95,30 +121,6 @@ dependencies {
     annotationProcessor room.compiler
     testImplementation room.test
 
-    implementation retrofit.rxJavaAdapter
-    implementation retrofit.retrofit
-    implementation retrofit.gsonConverter
-
-
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.android.support:support-vector-drawable:27.1.1'
-    kapt butterknife.butterknifeCompiler
-    implementation butterknife.butterknife
-
-    kapt dagger.daggerCompiler
-    implementation dagger.dagger
-    annotationProcessor dagger.daggerCompiler
-
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.github.kenglxn.QRGen:android:2.5.0'
-    implementation 'me.dm7.barcodescanner:zbar:1.8.4'
-
-    kapt moxy.moxyCompiler
-    implementation moxy.moxy
-    implementation moxy.moxyCompat
-    annotationProcessor moxy.moxyCompiler
 
     implementation "ru.terrakok.cicerone:cicerone:$versions.cicerone"
 

@@ -1,12 +1,11 @@
 package com.fcmchat.fcmchat.invite.business
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.Microchain
 import com.fcmchat.fcmchat.debug
-import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
-import com.fcmchat.fcmchat.fcm.models.InviteRequestParams
-import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
+import com.fcmchat.server.fcm.eventBus.InviteRequestEvent
+import com.fcmchat.server.fcm.models.InviteRequestParams
+import com.fcmchat.server.fcm.repo.IFcmRepo
 import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -18,7 +17,6 @@ import javax.inject.Inject
 class InviteInteractor : IInviteInteractor {
 
     @Inject lateinit var fcmRepo: IFcmRepo
-    @Inject lateinit var chainsRepo: IChainsRepo
 
     init {
         App.injector.inviteComponent.inject(this)
@@ -26,7 +24,7 @@ class InviteInteractor : IInviteInteractor {
     }
 
     override fun sendInvitation(key: String, microchain: Microchain): Completable {
-        val inviteRequest = InviteRequestParams(getCurrentUser(), microchain)
+        val inviteRequest = InviteRequestParams(getCurrentUser().toString())
         val message = Gson().toJson(inviteRequest)
 
         return fcmRepo.sendTo(key, InviteRequestEvent().getKey(), message)
@@ -38,7 +36,7 @@ class InviteInteractor : IInviteInteractor {
 
     override fun getCurrentUser() = User(name = fcmRepo.getUserName(), key = fcmRepo.getFcmKey())
 
-    override fun getChains(): Flowable<ArrayList<Microchain>> =
-            chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }
+    override fun getChains(): Flowable<ArrayList<Microchain>> = Flowable.just(ArrayList())
+//            chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }//fixme
 
 }

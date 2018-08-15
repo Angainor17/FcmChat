@@ -2,12 +2,8 @@ package com.fcmchat.fcmchat.router.presentation.presenter
 
 import com.arellomobile.mvp.InjectViewState
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
-import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
-import com.fcmchat.fcmchat.watcher.interactor.IWatcherInteractor
 import com.fcmchat.fcmchat.router.presentation.view.NavActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.fcmchat.fcmchat.server.watcher.interactor.IWatcherInteractor
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject

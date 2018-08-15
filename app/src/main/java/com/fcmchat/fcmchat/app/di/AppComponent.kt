@@ -1,10 +1,8 @@
 package com.fcmchat.fcmchat.app.di
 
 import android.content.Context
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
-import com.fcmchat.fcmchat.db.AppDatabase
-import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
+import com.fcmchat.fcmchat.server.watcher.interactor.IWatcherInteractor
+import com.fcmchat.server.fcm.repo.IFcmRepo
 import dagger.Component
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -18,9 +16,7 @@ interface AppComponent {
     fun context(): Context
     fun getNavigatorHolder(): NavigatorHolder
     fun getRouter(): Router
-    fun getDatabase(): AppDatabase
     fun getFcmRepo(): IFcmRepo
-    fun getChainRepo(): IChainsRepo
-    fun getTransactionsRepo(): ITransactionRepo
+    fun getWatcherInteractor(): IWatcherInteractor
 
 }

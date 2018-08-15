@@ -1,9 +1,8 @@
 package com.fcmchat.fcmchat.transactions.interactor
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.Microchain
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
+import com.fcmchat.server.fcm.repo.IFcmRepo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,20 +13,19 @@ import javax.inject.Inject
  */
 class TransactionInteractor : ITransactionInteractor {
 
-    @Inject lateinit var repo: ITransactionRepo
-    @Inject lateinit var chainsRepo: IChainsRepo
+    @Inject lateinit var fcmRepo: IFcmRepo
 
     init {
         App.injector.transactionComponent.inject(this)
     }
 
     override fun getTransactions(chain: Microchain): Flowable<ArrayList<TransactionItem>> =
-            repo.getTransaction().map { ArrayList(it) }
+            fcmRepo.getTransactions().map { ArrayList(it) }
                     .subscribeOn(AndroidSchedulers.mainThread())
                     .observeOn(Schedulers.io())
                     .map { ArrayList(it.map { TransactionItem(it!!) }) }
                     .map { ArrayList(it.filter { it.chainName == chain.chainName }) }
 
-    override fun getChains(): Flowable<ArrayList<Microchain>> =
-            chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }
+    override fun getChains(): Flowable<ArrayList<Microchain>> = Flowable.just(ArrayList())//fixme
+//            chainsRepo.getAllChains().map { ArrayList(it.map { (Microchain(it)) }) }
 }

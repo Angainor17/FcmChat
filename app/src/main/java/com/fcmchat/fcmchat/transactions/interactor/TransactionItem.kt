@@ -1,6 +1,6 @@
 package com.fcmchat.fcmchat.transactions.interactor
 
-import com.fcmchat.fcmchat.transactions.data.TransactionEntity
+import com.fcmchat.server.db.entity.TransactionEntity
 
 /**
  * Created by Voronin Igor on 10.08.2018.
