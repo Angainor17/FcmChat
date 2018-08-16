@@ -1,10 +1,11 @@
 package com.fcmchat.fcmchat.app.di
 
 import android.content.Context
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
-import com.fcmchat.fcmchat.db.AppDatabase
+import com.fcmchat.fcmchat.fcm.db.AppDatabase
+import com.fcmchat.fcmchat.fcm.db.repo.*
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
+import com.fcmchat.fcmchat.fcm.services.DbUpdateService
+import com.fcmchat.fcmchat.fcm.services.InitDbService
 import dagger.Component
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -22,5 +23,11 @@ interface AppComponent {
     fun getFcmRepo(): IFcmRepo
     fun getChainRepo(): IChainsRepo
     fun getTransactionsRepo(): ITransactionRepo
+    fun getUsersRepo(): IUsersRepo
+
+    fun inject(userRepo: UsersRepo)
+    fun inject(initDbService: InitDbService)
+    fun inject(dataDbService: DbUpdateService)
+    fun inject(transactionRepo: TransactionRepo)
 
 }

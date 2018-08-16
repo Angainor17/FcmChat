@@ -1,7 +1,7 @@
 package com.fcmchat.fcmchat.invite.business
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
+import com.fcmchat.fcmchat.fcm.db.repo.IChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.Microchain
 import com.fcmchat.fcmchat.debug
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent

@@ -1,6 +1,7 @@
 package com.fcmchat.fcmchat.router.di
 
 import com.fcmchat.fcmchat.app.di.AppComponent
+import com.fcmchat.fcmchat.fcm.db.repo.UsersRepo
 import com.fcmchat.fcmchat.router.presentation.presenter.NavPresenter
 import com.fcmchat.fcmchat.router.presentation.view.NavActivity
 import com.fcmchat.fcmchat.watcher.interactor.WatcherInteractor
@@ -17,5 +18,6 @@ interface NavComponent {
     fun inject(presenter: WatcherPresenter)
     fun inject(presenter: NavPresenter)
     fun inject(interactor: WatcherInteractor)
+    fun inject(usersRepo: UsersRepo)
 
 }

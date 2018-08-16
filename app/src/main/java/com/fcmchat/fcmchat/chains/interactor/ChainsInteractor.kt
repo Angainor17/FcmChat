@@ -1,13 +1,14 @@
 package com.fcmchat.fcmchat.chains.interactor
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.chains.data.ChainEntity
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
-import com.fcmchat.fcmchat.db.AppDatabase
+import com.fcmchat.fcmchat.fcm.db.AppDatabase
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
+import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
+import com.fcmchat.fcmchat.fcm.db.repo.IChainsRepo
+import com.fcmchat.fcmchat.fcm.db.repo.ITransactionRepo
+import com.fcmchat.fcmchat.fcm.db.repo.IUsersRepo
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
-import com.fcmchat.fcmchat.invite.data.UserEntity
-import com.fcmchat.fcmchat.transactions.data.ITransactionRepo
-import com.fcmchat.fcmchat.transactions.data.TransactionEntity
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -20,8 +21,8 @@ class ChainsInteractor : IChainsInteractor {
 
     @Inject lateinit var repo: IChainsRepo
     @Inject lateinit var fcmRepo: IFcmRepo
-    @Inject lateinit var db: AppDatabase
     @Inject lateinit var transactRepo: ITransactionRepo
+    @Inject lateinit var usersRepo: IUsersRepo
 
     init {
         App.injector.chainsComponent.inject(this)
@@ -40,31 +41,17 @@ class ChainsInteractor : IChainsInteractor {
         chainEntity.name = chain.chainName
 
         repo.addChain(chainEntity)
+        usersRepo.addUsers(getUserEntity(chainEntity),chainEntity)
 
-        val userEntity = addFirstUser(chainEntity)
-        addFirstTransaction(userEntity, chainEntity)
         subscribeToTopic(chain.chainName)
-    }
-
-    private fun addFirstTransaction(userEntity: UserEntity, chain: ChainEntity) {
-        val initTransaction = TransactionEntity(userEntity, chain)
-
-        transactRepo.addTransaction(initTransaction)
-    }
-
-    private fun addFirstUser(chain: ChainEntity): UserEntity {
-        val userEntity = getUserEntity(chain)
-        db.userDao().insert(userEntity)
-        return userEntity
     }
 
     private fun getUserEntity(chain: ChainEntity): UserEntity {
         val userEntity = UserEntity()
         userEntity.name = fcmRepo.getUserName()
-        userEntity.key = fcmRepo.getFcmKey()
-        userEntity.policy = UserEntity.SEND_AND_INVITE_POLICY
-        userEntity.chainId = chain.id
-        userEntity.chainName = chain.name
+        userEntity.data = UserEntity.SEND_AND_INVITE_POLICY.toString()
+        userEntity.chainKey = chain.key
+
         return userEntity
     }
 

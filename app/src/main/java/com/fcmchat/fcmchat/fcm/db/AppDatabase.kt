@@ -1,13 +1,13 @@
-package com.fcmchat.fcmchat.db
+package com.fcmchat.fcmchat.fcm.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
-import com.fcmchat.fcmchat.chains.data.ChainDao
-import com.fcmchat.fcmchat.chains.data.ChainEntity
-import com.fcmchat.fcmchat.invite.data.UserDao
-import com.fcmchat.fcmchat.invite.data.UserEntity
-import com.fcmchat.fcmchat.transactions.data.TransactionEntity
-import com.fcmchat.fcmchat.transactions.data.TransactionsDao
+import com.fcmchat.fcmchat.fcm.db.dao.ChainDao
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
+import com.fcmchat.fcmchat.fcm.db.dao.UserDao
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
+import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
+import com.fcmchat.fcmchat.fcm.db.dao.TransactionsDao
 
 /**
  * Created by Voronin Igor on 06.08.2018.
@@ -18,9 +18,7 @@ import com.fcmchat.fcmchat.transactions.data.TransactionsDao
         exportSchema = false)
 
 abstract class AppDatabase : RoomDatabase() {
-
     abstract fun chainDao(): ChainDao
     abstract fun transactionDao(): TransactionsDao
     abstract fun userDao(): UserDao
-
 }

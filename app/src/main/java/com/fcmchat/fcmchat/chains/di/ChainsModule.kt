@@ -1,7 +1,5 @@
 package com.fcmchat.fcmchat.chains.di
 
-import com.fcmchat.fcmchat.chains.data.ChainsRepo
-import com.fcmchat.fcmchat.chains.data.IChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.ChainsInteractor
 import com.fcmchat.fcmchat.chains.interactor.IChainsInteractor
 import com.fcmchat.fcmchat.chains.presentation.presenter.ChainsPresenter

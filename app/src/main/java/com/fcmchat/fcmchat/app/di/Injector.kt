@@ -19,7 +19,7 @@ import com.fcmchat.fcmchat.transactions.di.TransactionModule
  */
 class Injector(app: App) {
 
-    private val appComponent: AppComponent = DaggerAppComponent.builder().appModule(AppModule(app)).build()
+    val appComponent: AppComponent = DaggerAppComponent.builder().appModule(AppModule(app)).build()
 
     val inviteComponent: InviteComponent = DaggerInviteComponent.builder()
             .inviteModule(InviteModule())

@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.chains.data
+package com.fcmchat.fcmchat.fcm.db.entity
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
@@ -13,5 +13,11 @@ class ChainEntity {
 
     @PrimaryKey(autoGenerate = true) var id: Long = 0
     @ColumnInfo(name = "name") var name: String = ""
+    @ColumnInfo(name = "key") var key: String = ""
+    @ColumnInfo(name = "timestamp") var timestamp: Long = 0
+
+    fun init() {
+        key = applySha256(name + timestamp)
+    }
 
 }

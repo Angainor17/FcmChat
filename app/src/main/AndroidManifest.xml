@@ -24,13 +24,12 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".fcm.MyFirebaseInstanceIDService">
+        <service android:name=".fcm.services.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name=".fcm.MyFirebaseMessagingService">
+        <service android:name=".fcm.services.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -47,6 +46,14 @@
         <activity
             android:name=".invite.presentation.view.ScannerActivity"
             android:screenOrientation="portrait" />
+
+        <service
+            android:name=".fcm.services.InitDbService"
+            android:exported="false" />
+
+        <service
+            android:name=".fcm.services.DbUpdateService"
+            android:exported="false" />
 
     </application>
 

@@ -1,7 +1,7 @@
 package com.fcmchat.fcmchat.fcm.eventBus
 
 import com.fcmchat.fcmchat.fcm.models.InviteResponse
-import com.fcmchat.fcmchat.invite.data.UserEntity
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.google.gson.Gson
 
 /**

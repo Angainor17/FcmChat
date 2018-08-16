@@ -1,4 +1,4 @@
-package com.fcmchat.fcmchat.fcm
+package com.fcmchat.fcmchat.fcm.services
 
 import com.fcmchat.fcmchat.debug
 import com.google.firebase.messaging.FirebaseMessagingService
