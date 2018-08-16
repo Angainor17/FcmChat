@@ -10,9 +10,8 @@ import com.google.gson.Gson
 class InitTransaction : FcmTransaction() {
 
     var data = ""
-    var chain: ChainEntity? = null
-    var chainMembers: UserEntity? = null
-
+    lateinit var chain: ChainEntity
+    lateinit var chainMembers: UserEntity
 
     override fun initType(): String = "init_message"
 

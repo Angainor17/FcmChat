@@ -23,8 +23,6 @@ class WatcherPresenter : IWatcherPresenter {
         App.injector.navComponent.inject(this)
     }
 
-    override fun transactionEvent(request: TransactionEvent) = interactor.transactionEvent(request)
-
     override fun acceptInvitation(request: InviteRequestEvent) {
         compositeDisposable.add(interactor.acceptInvitation(request)
                 .observeOn(AndroidSchedulers.mainThread())

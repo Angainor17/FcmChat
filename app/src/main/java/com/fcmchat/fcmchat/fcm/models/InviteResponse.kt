@@ -1,5 +1,6 @@
 package com.fcmchat.fcmchat.fcm.models
 
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
 
 /**
@@ -8,8 +9,10 @@ import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
 class InviteResponse(
         request: InviteRequestEvent,
 
-        val userKey: String,
-        val userName: String,
+        lateinit var userKey: UserEntity
+
+//        val userKey: String,
+
         val chainName: String = request.chainName,
         val result: Int
 )

@@ -44,7 +44,7 @@ class TransactionsFragment : MvpAppCompatDialogFragment(), ITransactionView {
     }
 
     override fun setChainsList(list: ArrayList<String>) {
-        val spinnerAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list)!!
+        val spinnerAdapter = ArrayAdapter(context!!, android.R.layout.simple_list_item_1, list)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         chainsSpinner.adapter = spinnerAdapter

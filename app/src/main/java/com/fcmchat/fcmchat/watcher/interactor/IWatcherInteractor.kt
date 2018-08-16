@@ -12,5 +12,4 @@ interface IWatcherInteractor {
 
     fun acceptInvitation(request: InviteRequestEvent): Completable
     fun newUserAddToChain(response: InviteResponseEvent, sendFlag: Boolean, inviteFlag: Boolean): Completable
-    fun transactionEvent(request: TransactionEvent)
 }

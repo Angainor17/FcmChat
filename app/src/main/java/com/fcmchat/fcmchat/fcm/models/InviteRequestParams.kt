@@ -1,6 +1,8 @@
 package com.fcmchat.fcmchat.fcm.models
 
 import com.fcmchat.fcmchat.chains.interactor.Microchain
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.fcmchat.fcmchat.invite.business.User
 
 /**
@@ -10,7 +12,6 @@ class InviteRequestParams(
         user: User,
         microchain: Microchain,
 
-        val userName: String = user.name,
-        val chainName: String = microchain.chainName,
-        val fcmKey: String = user.key
+        var masterEntity: UserEntity,
+        var chainEntity: ChainEntity
 )

@@ -13,6 +13,7 @@ class UserEntity {
 
     @PrimaryKey(autoGenerate = true) var id: Long = 0
     @ColumnInfo(name = "name") var name: String = ""
+    @ColumnInfo(name = "fcmKey") var fcmKey: String = ""
     @ColumnInfo(name = "data") var data: String = ""
     @ColumnInfo(name = "timestamp") var timestamp: Long = 0
 

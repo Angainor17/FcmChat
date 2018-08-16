@@ -23,10 +23,10 @@ abstract class WatcherActivity : MvpAppCompatActivity() {
 
     @Inject lateinit var watcherPresenter: IWatcherPresenter
 
-    @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    fun inviteRequest(request: TransactionEvent) {
-        watcherPresenter.transactionEvent(request)
-    }
+//    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+//    fun inviteRequest(request: TransactionEvent) {
+//        watcherPresenter.transactionEvent(request)
+//    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun inviteRequest(request: InviteRequestEvent) = showReqAlertDialog(request)

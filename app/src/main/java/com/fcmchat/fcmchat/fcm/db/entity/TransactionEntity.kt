@@ -21,8 +21,10 @@ class TransactionEntity {
     @ColumnInfo(name = "chain_key") var chainKey: String = ""
 
     fun initHash() {
-        hash = applySha256(data + type + prevHash + chainKey)
+        hash = calculateHash()
     }
+
+    fun calculateHash() = applySha256(data + type + prevHash + chainKey)
 
     companion object {
         const val NEW_USER_TYPE = "New User"

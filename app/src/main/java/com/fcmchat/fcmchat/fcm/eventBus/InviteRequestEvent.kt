@@ -1,5 +1,7 @@
 package com.fcmchat.fcmchat.fcm.eventBus
 
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.fcmchat.fcmchat.fcm.models.InviteRequestParams
 import com.google.gson.Gson
 
@@ -8,17 +10,16 @@ import com.google.gson.Gson
  */
 class InviteRequestEvent : Event() {
 
-    var chainName = ""
-    var userName = ""
-    var userKey = ""
+    lateinit var slaveUser: UserEntity
+    lateinit var chain: ChainEntity
 
     override fun getKey() = "invite_request"
 
     override fun setMap(map: Map<String, String>) {
         val inviteReqParams = Gson().fromJson(map[getKey()], InviteRequestParams::class.java)!!
 
-        chainName = inviteReqParams.chainName
-        userName = inviteReqParams.userName
-        userKey = inviteReqParams.fcmKey
+        slaveUser.chainKey = inviteReqParams.chainName
+//        slaveUser.= inviteReqParams . userName
+        slaveUser.fcmKey = inviteReqParams.fcmKey
     }
 }

@@ -13,7 +13,6 @@ import com.fcmchat.fcmchat.fcm.eventBus.TransactionEvent
 import com.fcmchat.fcmchat.fcm.models.InviteResponse
 import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
 import com.fcmchat.fcmchat.fcm.transactions.DataTransaction
-import com.fcmchat.fcmchat.fcm.transactions.InitTransaction
 import com.fcmchat.fcmchat.watcher.interactor.transactions.TransactionValidator
 import com.google.gson.Gson
 import io.reactivex.Completable
@@ -39,33 +38,6 @@ class WatcherInteractor : IWatcherInteractor {
         App.injector.navComponent.inject(this)
     }
 
-    override fun transactionEvent(request: TransactionEvent) {
-        when (request.transaction.type) {
-            InitTransaction().type -> newUserTransaction(request)
-            DataTransaction().type -> newMessageTransaction(request)
-        }
-    }
-
-    private fun newMessageTransaction(request: TransactionEvent) {
-        TODO("new message")
-    }
-
-    private fun newUserTransaction(request: TransactionEvent) {
-        val newUserTransaction = request.transaction as InitTransaction
-        transactRepo.getTransactions().map { ArrayList(it) }.subscribe(
-                { transactions ->
-                    val transactionEntity = TransactionEntity()
-                    transactionEntity.type = TransactionEntity.NEW_USER_TYPE
-                    transactionEntity.prevHash = transactions.last().hash
-                    transactionEntity.chainKey = newUserTransaction.chain?.key ?: ""
-                    transactionEntity.data = ""
-
-                    if (transactionValidator.isValid(transactionEntity, transactions)) {
-                        transactRepo.addTransaction(transactionEntity)
-                    }
-                }) { }
-    }
-
     override fun acceptInvitation(request: InviteRequestEvent): Completable {
         val response = InviteResponse(request, fcmRepo.getFcmKey(), fcmRepo.getUserName(), result = UserEntity.OK_RESULT)
 
@@ -81,8 +53,13 @@ class WatcherInteractor : IWatcherInteractor {
                 Function3<UserEntity, ChainEntity, ArrayList<TransactionEntity>, UserEntity> { user, chain, transactions ->
                     user.chainKey = chain.key
                     notifyChain(user, transactions)
+                    sendInitDataForNewUser()
                     user
                 })!!.toCompletable()
+    }
+
+    private fun sendInitDataForNewUser() {
+        fcmRepo.sendTo()
     }
 
     private fun notifyChain(newUser: UserEntity, transactions: ArrayList<TransactionEntity>) {
@@ -94,13 +71,14 @@ class WatcherInteractor : IWatcherInteractor {
 
         transaction.initHash()
 
-        fcmRepo.notifyAll(TransactionEvent().getKey(), Gson().toJson(transaction), newUser.name)
+        fcmRepo.notifyAll(TransactionEvent().getKey(), Gson().toJson(DataTransaction(transaction)), newUser.name)
                 .subscribe({}, { _ -> })
     }
 
     private fun createNewUser(response: InviteResponseEvent, sendFlag: Boolean, inviteFlag: Boolean): Single<UserEntity> {
         val userEntity = UserEntity()
         userEntity.name = response.userName
+        userEntity.fcmKey = response.userKey
         userEntity.timestamp = Calendar.getInstance().timeInMillis
         userEntity.data = "" + UserEntity.getPolicy(sendFlag, inviteFlag)
 
