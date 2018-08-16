@@ -27,7 +27,6 @@ class FcmRepo(context: Context) : IFcmRepo {
     override fun notifyAll(paramName: String, message: String, topicName: String) =
         fcmServer.sendPushAll(FcmMessage(message, paramName = paramName), topicName)
 
-
     override fun sendTo(key: String, paramName: String, message: String) = fcmServer.sendPushTo(
             FcmMessage(message, key, paramName)
     )

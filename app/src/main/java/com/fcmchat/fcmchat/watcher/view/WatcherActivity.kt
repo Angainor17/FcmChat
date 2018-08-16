@@ -61,8 +61,8 @@ abstract class WatcherActivity : MvpAppCompatActivity() {
 
     private fun createResponseInviteView(response: InviteResponseEvent): View {
         val view = LayoutInflater.from(this).inflate(R.layout.invite_response_alert_dialog, null, false)
-        view.findViewById<TextView>(R.id.user_name).text = response.userName
-        view.findViewById<TextView>(R.id.chain_name).text = response.chainName
+        view.findViewById<TextView>(R.id.user_name).text = response.slaveUser.name
+        view.findViewById<TextView>(R.id.chain_name).text = response.chainEntity.name
 
         return view
     }
@@ -91,8 +91,8 @@ abstract class WatcherActivity : MvpAppCompatActivity() {
         val chainNameTv = view.findViewById<TextView>(R.id.chain_name)!!
         val userNameTv = view.findViewById<TextView>(R.id.user_name)!!
 
-        chainNameTv.text = request.chainName
-        userNameTv.text = request.userName
+        chainNameTv.text = request.chain.name
+        userNameTv.text = request.masterUser.name
 
         return view
     }

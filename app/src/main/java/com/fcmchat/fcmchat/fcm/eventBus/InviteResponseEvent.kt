@@ -1,5 +1,6 @@
 package com.fcmchat.fcmchat.fcm.eventBus
 
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
 import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.fcmchat.fcmchat.fcm.models.InviteResponse
 import com.google.gson.Gson
@@ -10,6 +11,7 @@ import com.google.gson.Gson
 class InviteResponseEvent : Event() {
 
     lateinit var slaveUser: UserEntity
+    lateinit var chainEntity: ChainEntity
     var result = UserEntity.SEND_AND_INVITE_POLICY
 
     override fun getKey() = "invite_response"
@@ -17,9 +19,8 @@ class InviteResponseEvent : Event() {
     override fun setMap(map: Map<String, String>) {
         val inviteReqParams = Gson().fromJson(map[getKey()], InviteResponse::class.java)!!
 
-        slaveUser.chainKey = inviteReqParams.chainName
-        slaveUser.name = inviteReqParams.userName
-        slaveUser.fcmKey = inviteReqParams.userKey
+        slaveUser = inviteReqParams.userSlave
+        chainEntity = inviteReqParams.chain
         result = inviteReqParams.result
     }
 }

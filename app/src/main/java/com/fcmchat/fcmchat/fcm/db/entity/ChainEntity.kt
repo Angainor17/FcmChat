@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey
  * DM means Data Model
  */
 @Entity(tableName = "microchain")
-class ChainEntity {
+class ChainEntity() {
 
     @PrimaryKey(autoGenerate = true) var id: Long = 0
     @ColumnInfo(name = "name") var name: String = ""
@@ -20,4 +20,8 @@ class ChainEntity {
         key = applySha256(name + timestamp)
     }
 
+    constructor(name: String, key: String) : this() {
+        this.name = name
+        this.key = key
+    }
 }

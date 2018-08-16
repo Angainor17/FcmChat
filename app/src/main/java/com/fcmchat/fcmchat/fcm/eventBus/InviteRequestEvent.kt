@@ -10,7 +10,7 @@ import com.google.gson.Gson
  */
 class InviteRequestEvent : Event() {
 
-    lateinit var slaveUser: UserEntity
+    lateinit var masterUser: UserEntity
     lateinit var chain: ChainEntity
 
     override fun getKey() = "invite_request"
@@ -18,8 +18,7 @@ class InviteRequestEvent : Event() {
     override fun setMap(map: Map<String, String>) {
         val inviteReqParams = Gson().fromJson(map[getKey()], InviteRequestParams::class.java)!!
 
-        slaveUser.chainKey = inviteReqParams.chainName
-//        slaveUser.= inviteReqParams . userName
-        slaveUser.fcmKey = inviteReqParams.fcmKey
+        masterUser = inviteReqParams.masterEntity
+        chain = inviteReqParams.chainEntity
     }
 }

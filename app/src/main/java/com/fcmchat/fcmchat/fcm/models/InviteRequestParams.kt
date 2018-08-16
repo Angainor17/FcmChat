@@ -9,9 +9,6 @@ import com.fcmchat.fcmchat.invite.business.User
  * Created by Voronin Igor on 09.08.2018.
  */
 class InviteRequestParams(
-        user: User,
-        microchain: Microchain,
-
         var masterEntity: UserEntity,
         var chainEntity: ChainEntity
 )
