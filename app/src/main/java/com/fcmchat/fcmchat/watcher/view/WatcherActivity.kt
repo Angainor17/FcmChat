@@ -9,7 +9,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.fcmchat.fcmchat.R
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
 import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
-import com.fcmchat.fcmchat.fcm.eventBus.TransactionEvent
 import com.fcmchat.fcmchat.watcher.presenter.IWatcherPresenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

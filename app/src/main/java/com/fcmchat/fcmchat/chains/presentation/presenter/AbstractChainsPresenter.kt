@@ -1,7 +1,6 @@
 package com.fcmchat.fcmchat.chains.presentation.presenter
 
 import com.arellomobile.mvp.MvpPresenter
-import com.fcmchat.fcmchat.chains.interactor.Microchain
 import com.fcmchat.fcmchat.chains.presentation.view.IChainsView
 
 /**

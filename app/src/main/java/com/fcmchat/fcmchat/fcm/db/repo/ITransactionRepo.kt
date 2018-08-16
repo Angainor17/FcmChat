@@ -1,6 +1,5 @@
 package com.fcmchat.fcmchat.fcm.db.repo
 
-import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
 import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable

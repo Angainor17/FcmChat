@@ -1,8 +1,8 @@
 package com.fcmchat.fcmchat.transactions.interactor
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.fcm.db.repo.IChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.Microchain
+import com.fcmchat.fcmchat.fcm.db.repo.IChainsRepo
 import com.fcmchat.fcmchat.fcm.db.repo.ITransactionRepo
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers

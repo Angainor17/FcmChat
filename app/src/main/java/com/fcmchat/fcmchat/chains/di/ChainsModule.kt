@@ -2,8 +2,8 @@ package com.fcmchat.fcmchat.chains.di
 
 import com.fcmchat.fcmchat.chains.interactor.ChainsInteractor
 import com.fcmchat.fcmchat.chains.interactor.IChainsInteractor
-import com.fcmchat.fcmchat.chains.presentation.presenter.ChainsPresenter
 import com.fcmchat.fcmchat.chains.presentation.presenter.AbstractChainsPresenter
+import com.fcmchat.fcmchat.chains.presentation.presenter.ChainsPresenter
 import dagger.Module
 import dagger.Provides
 

@@ -9,7 +9,7 @@ import com.fcmchat.fcmchat.transactions.presentation.view.ITransactionView
 abstract class AbstractTransactionPresenter : MvpPresenter<ITransactionView>() {
 
     abstract fun addTransactionBtnClick()
-    abstract fun viewCreated(chainName:String)
-    abstract fun chainChange(chainName:String)
+    abstract fun viewCreated(chainName: String)
+    abstract fun chainChange(chainName: String)
 
 }

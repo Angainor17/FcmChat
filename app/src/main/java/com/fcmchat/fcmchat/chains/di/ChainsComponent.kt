@@ -1,10 +1,10 @@
 package com.fcmchat.fcmchat.chains.di
 
 import com.fcmchat.fcmchat.app.di.AppComponent
-import com.fcmchat.fcmchat.fcm.db.repo.ChainsRepo
 import com.fcmchat.fcmchat.chains.interactor.ChainsInteractor
 import com.fcmchat.fcmchat.chains.presentation.presenter.ChainsPresenter
 import com.fcmchat.fcmchat.chains.presentation.view.ChainsFragment
+import com.fcmchat.fcmchat.fcm.db.repo.ChainsRepo
 import dagger.Component
 
 /**

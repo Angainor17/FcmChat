@@ -53,7 +53,7 @@ class TransactionPresenter : AbstractTransactionPresenter() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ list -> setTransactions(list) })
-                {e-> setTransactions(ArrayList()) })
+                { e -> setTransactions(ArrayList()) })
     }
 
     private fun getChainByName(chainName: String) = chains.first { chainName == it.chainName }

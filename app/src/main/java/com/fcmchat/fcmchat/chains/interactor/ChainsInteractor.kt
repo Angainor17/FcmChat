@@ -1,9 +1,7 @@
 package com.fcmchat.fcmchat.chains.interactor
 
 import com.fcmchat.fcmchat.app.App
-import com.fcmchat.fcmchat.fcm.db.AppDatabase
 import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
-import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
 import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 import com.fcmchat.fcmchat.fcm.db.repo.IChainsRepo
 import com.fcmchat.fcmchat.fcm.db.repo.ITransactionRepo
@@ -41,7 +39,7 @@ class ChainsInteractor : IChainsInteractor {
         chainEntity.name = chain.chainName
 
         repo.addChain(chainEntity)
-        usersRepo.addUsers(getUserEntity(chainEntity),chainEntity)
+        usersRepo.addUsers(getUserEntity(chainEntity), chainEntity)
 
         subscribeToTopic(chain.chainName)
     }

@@ -25,7 +25,7 @@ class FcmRepo(context: Context) : IFcmRepo {
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
     override fun notifyAll(paramName: String, message: String, topicName: String) =
-        fcmServer.sendPushAll(FcmMessage(message, paramName = paramName), topicName)
+            fcmServer.sendPushAll(FcmMessage(message, paramName = paramName), topicName)
 
     override fun sendTo(key: String, paramName: String, message: String) = fcmServer.sendPushTo(
             FcmMessage(message, key, paramName)

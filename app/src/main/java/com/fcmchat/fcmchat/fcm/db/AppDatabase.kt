@@ -3,11 +3,11 @@ package com.fcmchat.fcmchat.fcm.db
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.fcmchat.fcmchat.fcm.db.dao.ChainDao
-import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
-import com.fcmchat.fcmchat.fcm.db.dao.UserDao
-import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
-import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
 import com.fcmchat.fcmchat.fcm.db.dao.TransactionsDao
+import com.fcmchat.fcmchat.fcm.db.dao.UserDao
+import com.fcmchat.fcmchat.fcm.db.entity.ChainEntity
+import com.fcmchat.fcmchat.fcm.db.entity.TransactionEntity
+import com.fcmchat.fcmchat.fcm.db.entity.UserEntity
 
 /**
  * Created by Voronin Igor on 06.08.2018.

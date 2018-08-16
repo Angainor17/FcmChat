@@ -1,8 +1,6 @@
 package com.fcmchat.fcmchat.invite.presentation.view
 
 import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
@@ -12,7 +10,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 interface IInviteActivityView : MvpView {
 
-//    @StateStrategyType(AddToEndStrategy::class)
+    //    @StateStrategyType(AddToEndStrategy::class)
     fun setDeviceId(deviceID: String)
 
     @StateStrategyType(SkipStrategy::class)

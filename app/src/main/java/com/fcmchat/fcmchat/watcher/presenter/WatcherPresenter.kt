@@ -3,7 +3,6 @@ package com.fcmchat.fcmchat.watcher.presenter
 import com.fcmchat.fcmchat.app.App
 import com.fcmchat.fcmchat.fcm.eventBus.InviteRequestEvent
 import com.fcmchat.fcmchat.fcm.eventBus.InviteResponseEvent
-import com.fcmchat.fcmchat.fcm.eventBus.TransactionEvent
 import com.fcmchat.fcmchat.watcher.interactor.IWatcherInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
