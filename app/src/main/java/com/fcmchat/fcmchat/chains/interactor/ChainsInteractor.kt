@@ -39,7 +39,14 @@ class ChainsInteractor : IChainsInteractor {
         chainEntity.name = chain.chainName
 
         repo.addChain(chainEntity)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .subscribe({}, {})
+
         usersRepo.addUsers(getUserEntity(chainEntity), chainEntity)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
+                .subscribe({},{})
 
         subscribeToTopic(chain.chainName)
     }

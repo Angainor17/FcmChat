@@ -10,5 +10,5 @@ data class Microchain(
         val chainKey: String = ""
 ) {
 
-    constructor(chainEntity: ChainEntity) : this(chainEntity.name)
+    constructor(chainEntity: ChainEntity) : this(chainEntity.name, chainEntity.key)
 }

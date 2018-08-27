@@ -19,6 +19,7 @@ import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.functions.Function3
+import io.reactivex.schedulers.Schedulers
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -67,6 +68,9 @@ class WatcherInteractor : IWatcherInteractor {
             val initDbEvent = InitDbEvent(it, chain, transactions)
             val text = Gson().toJson(initDbEvent)
             fcmRepo.sendTo(slaveUser.fcmKey, initDbEvent.getKey(), text)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .subscribe()//fixme
         }.subscribe({}, {})
     }
 

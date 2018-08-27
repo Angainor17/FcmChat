@@ -17,7 +17,7 @@ class ChainsRepo : IChainsRepo {
         App.injector.chainsComponent.inject(this)
     }
 
-    override fun addChain(newChain: ChainEntity) =
+    override fun addChain(newChain: ChainEntity): Completable =
             Completable.fromCallable { db.chainDao().insert(newChain) }!!
 
     override fun getAllChains() = db.chainDao().getAll().map { ArrayList(it) }!!

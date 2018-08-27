@@ -28,7 +28,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     @Subscribe(threadMode = ThreadMode.BACKGROUND)
-    private fun transactionProcess(transactionEvent: TransactionEvent) =
+    fun transactionProcess(transactionEvent: TransactionEvent) =
             startService(when (transactionEvent.transaction) {
                 is DataTransaction ->
                     Intent(this, DbUpdateService::class.java).setExtra(transactionEvent)

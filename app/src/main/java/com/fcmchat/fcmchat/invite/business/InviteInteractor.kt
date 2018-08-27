@@ -11,6 +11,7 @@ import com.fcmchat.fcmchat.fcm.repo.IFcmRepo
 import com.google.gson.Gson
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -31,6 +32,9 @@ class InviteInteractor : IInviteInteractor {
             val inviteRequest = InviteRequestParams(getCurrentUserEntity(microchain), chainEntity)
             val message = Gson().toJson(inviteRequest)
             fcmRepo.sendTo(key, InviteRequestEvent().getKey(), message)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .subscribe()//fixme
         }.toCompletable()
     }
 
